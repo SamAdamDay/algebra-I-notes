@@ -304,7 +304,7 @@ f(x) = q(x)g(x) + r(x) \tag{with deg $r(x)$ < deg $g(x)$}
 \end{align*}
 \end{prop}
 \pr{
-If $\deg(f) < \deg(g)$ then we take $q(x) = 0, r(x) = f(x)$ and we are done.\\ Hence we can now assume that $\deg(f) \leq \deg(g)$, then
+If $\deg(f) < \deg(g)$ then we take $q(x) = 0, r(x) = f(x)$ and we are done.\\ Hence we can now assume that $\deg(g) \leq \deg(f)$, then
 \begin{align*}
 f(x) &= a_nx^n + \cdots + a_1 x + a_0\\
 g(x) &= b_mx^m + \cdots + b_1 x + b_0
@@ -312,14 +312,14 @@ g(x) &= b_mx^m + \cdots + b_1 x + b_0
 with $n \leq m$. Then $\deg\left( f(x) - \frac{a_n}{b_m} x^{n-m}g(x) \right) < \deg f(x)$.\\
 Then by induction on $\deg f$ we have that 
 $$\exists s, r \in \F[x] : s(x)g(x) + r(x) = f(x) - \frac{a_n}{b_m} x^{n-m}g(x) \text{ and } \deg r < \deg g$$
-Now setting $q(x) = \frac{a_n}{b_m} x^{n-m}g(x) + s(x)$ the result follows.\qed
+Now setting $q(x) = \frac{a_n}{b_m} x^{n-m} + s(x)$ the result follows.\qed
 }
 
 \newpage
 \begin{cor}
 For $f(x) \in \F[x], a \in \F$, if $f(a) = 0$ then $(x-a)|f(x)$
 \pr{
-By the division algorithm there exist $q,r \in \F[x]$ with $\deg r < \deg (x-a) = 1$ with $f(x) = q(x)(x-a) + r(x)$. Since $\deg r < 1$ it obtains that $r \in \F$, that is $r$ is constant, then:
+By the division algorithm there exist $q,r \in \F[x]$ with $\deg r < \deg (x-a) = 1$ with $f(x) = q(x)(x-a) + r(x)$. Since $\deg r < 1$, we must have that $r \in \F$, that is $r$ is constant, then:
 \begin{align*}
 f(x) 	&= q(x)(x-a) + r\\
 f(a)	&= q(a)(a-a) + r
@@ -376,7 +376,7 @@ Hence we can set $f(x) = \sum_{i=0}^k a_i x^i$ and we are done\\[-8pt] \qed
 \begin{thm}
 If $f(A) = 0$ for $f(x) \in \F[x]$, then $m_A(x) | f(x)$. Furthermore, $m_A(x)$ is unique.
 \pr{
-Suppose $f(A) = 0$ for some $f(x) \in \\F[x]$.\\ Applying polynomial long division to $f(x) \div m_A(A)$ we have that there exists $q(x), r(x) \in \F[x]$ such that $f(x) = q(x)m_A(x) + r(x)$ with $\deg r(x) < \deg m_A(x)$. Now, evaluating at $x = a$ we obtain $r(a) = 0$. Since $r$ has degree less than $m_A$, it must be identically zero, else it would contradict the choice of $m_A$ as a minimal polynomial. Thus $f(x) = q(x)m_A(x)$ and so $m_A(x) | f(x)$ as required.\\
+Suppose $f(A) = 0$ for some $f(x) \in \F[x]$.\\ Applying polynomial long division to $f(x) \div m_A(x)$ we have that there exists $q(x), r(x) \in \F[x]$ such that $f(x) = q(x)m_A(x) + r(x)$ with $\deg r(x) < \deg m_A(x)$. Now, evaluating at $A$ we obtain $r(A) = 0$. Since $r$ has degree less than $m_A$, it must be identically zero, else it would contradict the choice of $m_A$ as a minimal polynomial. Thus $f(x) = q(x)m_A(x)$ and so $m_A(x) | f(x)$ as required.\\
 It follows that if there were two monic polynomials $m_A, m'_A$ such that $m_A(A) = m'_A(A) = 0$ then as they must both divide each other they must be equal, hence $m_A$ is unique.\\[-8pt]\qed
 }
 \end{thm}
@@ -418,7 +418,7 @@ Hence $a_n = (-1)^n$, $a_{n-1} = (-1)^{n-1} (a_{11} + \cdots + a_{nn}) = (-1)^{n
 \pr{ a $\iff$ b
 \begin{align*}
 \chi_A(\lambda) = 0 	&\iff \det(A - \lambda I) = 0\\
-						&\iff \text{$A$ is singular}\\
+						&\iff \text{$(A-\lambda I)$ is singular}\\
 						&\iff \exists v \in \F^n : (A - \lambda I)v = 0, v \neq 0\\
 						&\iff \exists v \in \F^n : Av = \lambda v, v \neq 0
 \end{align*}
@@ -429,7 +429,7 @@ First we note that by a corollary to the division algorithm $m_A(\lambda) = 0 \R
 					&= m_A(A) w\\
 					&= 0
 \end{align*}
-Hence $Av = \lambda v$ - $\lambda$ is an eigenvalue.\\
+Hence $Av = \lambda v$, i.e. $\lambda$ is an eigenvalue.\\
 a $\Rightarrow$ c\\
 Assume $\lambda$ is an eigenvalue. Then there exists a non-zero vector $v \in \F^n$ such that $Av = \lambda v$. Then
 $$m_A(\lambda)v = m_A(A) v = 0 \cdot v = 0$$ and since $v \neq 0$ we have that $m_A(\lambda) = 0$ and hence $\lambda$ is a root of $m_A(x)$\\ \qed
@@ -440,7 +440,7 @@ $$m_A(\lambda)v = m_A(A) v = 0 \cdot v = 0$$ and since $v \neq 0$ we have that $
 Let $V$ be a vector space over a field $\F$\\
 Let $U$ be a subspace of $V$
 
-\begin{defn} The set of cosets $V/U = \{ v + U : v \in V \}$ for a vector space, the \textbf{quotient space}, with operations:
+\begin{defn} The set of cosets $V/U = \{ v + U : v \in V \}$ is a vector space, the \textbf{quotient space}, with operations:
 \begin{align*}
 (v + U) + (w + U) &= (v + w) + U\tag{$\forall v,w \in V$}\\
 a ( v + U ) &= av + U \tag{$\forall a \in \F, v \in V$}
@@ -467,19 +467,19 @@ Take $v + U \in V/U$\\
 As $v \in V$ there exist $a_i \in \F$, $e_1, \ldots, e_k \in \mathcal{E}$ and $e_{k+1}, \ldots, e_n \in \mathcal{B} \bk \mathcal{E}$ such that $$v = a_1 e_1 + \cdots + a_k e_k + a_{k+1} e_{k+1} + \cdots + a_n e_n$$
 Then
 \begin{align*}
-v+U 	&= a_1 e_1 + cdots + a_n e_n + U\\
+v+U 	&= a_1 e_1 + \cdots + a_n e_n + U\\
 		&= a_{k+1} e_{k+1} + \cdots + a_n e_n + U \tag{$a_1 e_1 + \cdots + a_k e_k \in U$}\\
 		&= a_{k+1} (e_{k+1} + U) + \cdots + a_n (e_n + U) \in \Sp \left( \overline{\mathcal{B}} \right)
 \end{align*}
 Hence $\overline{\mathcal{B}}$ spans $V/U$, it remains to show that $\overline{\mathcal{B}}$ is linearly independent\\
-Suppose that we have $a_1(e_1 + U) + \cdots + a_n (e_n + U) = 0$ with $e_1 + U, \ldots, e_n + U \in \overline{\mathcal{B}}$ and $e_1, \ldots, e_k \in \mathcal{B} \bk \mathcal{E}$. Then
+Suppose that we have $a_1(e_1 + U) + \cdots + a_n (e_n + U) = 0$ with $e_1 + U, \ldots, e_n + U \in \overline{\mathcal{B}}$ and $e_1, \ldots, e_n \in \mathcal{B} \bk \mathcal{E}$. Then
 \begin{align*}
 				&a_1 e_1 + \ldots + a_n e_n + U = U\\
 \Rightarrow	 	&a_1 e_1 + \ldots + a_n e_n \in U\\
 \Rightarrow		&a_1 e_1 + \ldots + a_n e_n = b_1 e'_1 + \ldots + b_k e'_k \tag{$b_i \in \F, e'_i \in \mathcal{E}$}\\
-\Rightarrow 	&a_1 = \cdots = a_n = b_1 = \cdots = b_k = 0 \tag{$\mathcal{E}$ is linearly independent}\\
-\Rightarrow		&\overline{\mathcal{B}} \text{ is linearly independent}
+\Rightarrow 	&a_1 = \cdots = a_n = b_1 = \cdots = b_k = 0 \tag{$\mathcal{E}$ is linearly independent}
 \end{align*}
+Hence $\overline{\mathcal{B}}$ is linearly independent
 }\end{prop}
 
 \begin{exmp}${}$
@@ -574,7 +574,7 @@ $$_\mathcal{B'}[T]_\mathcal{B} = \pmx{_\mathcal{E'}[T|_A]_\mathcal{E} & \star \\
 \begin{rem} 
 \begin{align*}
 \overline{T} (e_j + A) 	&= T(e_j) + B\\
-							&= a_{1j}e_1' + \cdots + a_{mj}em' + B\\
+							&= a_{1j}e_1' + \cdots + a_{mj}e_m' + B\\
 							&= a_{l+1,j}e_{l+1}' + \cdots + a_{mj}e_m' + B \tag{$a_{1j}e_j' + \cdots + a_{lj}e_l \in B$}\\
 							&= (a_{l+1,j}e_{l+1,j} + B) + \cdots + (a_{mj}e_m' + B)
 \end{align*}
@@ -637,7 +637,7 @@ Say $P^{-1}AP = B$, then
 We proceed by induction on $\dim V = n$\\
 If $n = 1$, then clearly $_\mathcal{B}[T]_\mathcal{B}$ is upper triangular for any basis $\mathcal{B}$\\
 In general, $\chi_T$ has a root $\lambda$ and hence $\exists v_1 \in V$ such that $Tv_1 = \lambda v_1$.\\
-Now, let $U = \spn{v_1}$, then $U$ is $T-$invariant. Consider $\overline{T} : V/U \to V/U$, by proposition, $\chi_{\overline{T}}(x)$ is also a product of linear factors. By the induction hypothesis, $\exists \overline{\mathcal{B}} = \{ v_2 + U, \ldots, v_n + U \}$ such that $_{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}}$ is upper-triangular. We can now put $\mathcal{B} = \{ v_1, v_2, \ldots, v_n \}$, so $\mathcal{B}$ is a basis for $V$ and 
+Now, let $U = \spn{v_1}$, then $U$ is $T-$invariant. Consider $\overline{T} : V/U \to V/U$; by proposition, $\chi_{\overline{T}}(x)$ is also a product of linear factors. By the induction hypothesis, $\exists \overline{\mathcal{B}} = \{ v_2 + U, \ldots, v_n + U \}$ such that $_{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}}$ is upper-triangular. We can now put $\mathcal{B} = \{ v_1, v_2, \ldots, v_n \}$, so $\mathcal{B}$ is a basis for $V$ and 
 $$_\mathcal{B}[T]_\mathcal{B} = \pmx{ \lambda & \star \\ 0 & _{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}}}$$
 Since $_{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}}$ is upper triangular then so is $_\mathcal{B}[T]_\mathcal{B}$.
 }\qed
@@ -654,7 +654,7 @@ Then $(A - \lambda_1 I) \cdots (A - \lambda_n I) = 0$
 Let $e_1, \ldots, e_n$ be the standard basis for $\F^n$.\\
 $(A - \lambda_n I)v \in \spn{e_1, \ldots, e_{n-1}}$ for all $v \in V$\\
 More generally,\\
-$(A - \lambda_1 I)w \in \spn{e_1, \ldots, e_{i-1}}$ for all $w \in \spn{e_1, \ldots, e_i}$
+$(A - \lambda_i I)w \in \spn{e_1, \ldots, e_{i-1}}$ for all $w \in \spn{e_1, \ldots, e_i}$
 \todo[inline, color=green!30]{Why... more explanation required here}
 Hence,\\
 $\underbrace{(A - \lambda_1 I)}_{\in \spn{e_1}} \underbrace{\cdots\cdots\cdots}_{\in \spn{e_1, \ldots, e_{n-2}}} \underbrace{(A - \lambda_{n-1}I)}_{\in \spn{e_1, \ldots, e_{n-1}}}(A - \lambda_n I)v$
@@ -665,7 +665,7 @@ $\underbrace{(A - \lambda_1 I)}_{\in \spn{e_1}} \underbrace{\cdots\cdots\cdots}_
 If $T: V \to V$ is a linear transformation and $V$ finite dimensional, then $\chi_T(T) = 0$ and hence $m_T(x) \div \chi_T(x)$
 \end{thm}
 \pr{
-We work over the algebraic closure $\overline{\F} \supset \F$\\
+We work over the algebraic closure $\overline{\F} \supseteq \F$\\
 Now, $\chi_T(x) = (x - \lambda_1) \cdots (x - \lambda_n)$ for some $\lambda_i \in \overline{\F}$.\\ By the above theorem, for some basis $\mathcal{B}$, $A = {_\mathcal{B}[}T]_\mathcal{B}$ is upper-triangular.\\
 Hence $\chi_T(T) = \chi_T(A) = (A - \lambda_1 I) \cdots (A - \lambda_n I) = 0$\\
 As the minimal polynomial divides any annihilating polynomial it must divide $\chi_T(x)$. 
@@ -764,7 +764,7 @@ b(T)[(a(T)s(T))(v)] &= s(T)[a(T)b(T)(v)]\\
 					&= \boldsymbol{0}
 \end{align*}
 
-Hence $a(T)s(T) \in \ker b(T)$, and similarly $b(T)t(T) \in \ker a(T)$ such that $V = \ker a(T) + \ker b(T)$.
+Hence $a(T)s(T) \in \ker b(T)$, and similarly $b(T)t(T) \in \ker a(T)$ so $V = \ker a(T) + \ker b(T)$.
 
 It remains to show that $\ker a(T) \cap \ker b(T) = \{ 0 \}$
 
@@ -824,7 +824,7 @@ Put $a = f_1 \cdots f_{r-1}$ and $b = f_r$ and proceed by induction using Propos
 
 \begin{rem}${}$
 \begin{itemize}
-\item Given $m_t(x) = f_1(x)^{m_1} \cdots f_r(x)^{m_r}$ as in the theorem, $$\chi(x) = f_1(x)^{n_1} \cdots f_r(x)^{n_r} \text{ with } n_i \geq m_i$$
+\item Given $m_T(x) = f_1(x)^{m_1} \cdots f_r(x)^{m_r}$ as in the theorem, $$\chi(x) = f_1(x)^{n_1} \cdots f_r(x)^{n_r} \text{ with } n_i \geq m_i$$
 \pr{
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -886,7 +886,7 @@ Suppose $A = \smp{1 & -1 \\ 1 & 1}$ and $\chi_A = (1-x)^2 + 1 = x^2 - 2x + 2$, t
 (2)\;\; \F = \C	&\Longrightarrow \chi_A(x) = (x - (1+i))(x - (1-i))\\
 		&\Longrightarrow \chi_A(x) = m_A(x) \tag{distinct roots}\\
 		&\Longrightarrow \text{triangulizable and diagonalizable} \\\\
-(3)\;\; \F = \\F_5 &\Longrightarrow \chi_A(x) = (x-3)(x-4)\\
+(3)\;\; \F = \F_5 &\Longrightarrow \chi_A(x) = (x-3)(x-4)\\
 		&\Longrightarrow \chi_A(x) = m_A(x) \tag{distinct roots}\\
 		&\Longrightarrow \text{triangulizable and diagonalizable}
 \end{align*}
