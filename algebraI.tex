@@ -1,0 +1,2202 @@
+\documentclass[11pt, a4paper]{report}
+%\begin{foo}
+\usepackage{url,graphicx,tabularx,array}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{mathdots}
+\usepackage[T1]{fontenc}
+\usepackage{ae,aecompl}
+\usepackage{enumerate}
+\usepackage{textcomp}
+\usepackage{marginnote}
+\usepackage{changepage}
+\usepackage{datetime}
+\usepackage{pgfplots}
+\usepackage{todonotes}
+%\usepackage{pifont}
+\usepackage{xcolor}
+\usepackage[left=0.8in, right=0.8in]{geometry}
+
+\usepackage{tikz}
+\usetikzlibrary{matrix}
+
+\hypersetup{colorlinks=true, filecolor=blue}
+
+%\pagecolor[rgb]{0.88,0.6,0.6}
+\color[rgb]{0,0,0}
+
+\setlength{\parskip}{1ex} % -- skip lines between paragraphs
+\setlength{\parindent}{0pt} % -- don't indent paragraphs
+\linespread{1.35} % -- 1 1/4 line spacing
+\numberwithin{equation}{section}
+
+% -- Commands for header
+\renewcommand{\title}[1]{\textbf{#1}\\}
+\renewcommand{\line}{\begin{tabularx}{\textwidth}{X>{\raggedleft}X}\hline\\\end{tabularx}\\[-0.5cm]}
+\newcommand{\leftright}[2]{\begin{tabularx}{\textwidth}{X>{\raggedleft}X}#1%
+& #2\end{tabularx}\\[-0.5cm]}
+
+% -- Section Formating (ssection)
+\newcommand{\sn}[1]{%
+  \section[#1]{#1}}
+\newcommand{\ssn}[1]{%
+  \subsection[#1]{#1}}
+\newcommand{\sssn}[1]{%
+  \subsubsection*{#1}}
+
+% -- Misc. Custom Commands
+\newcommand{\eq}[1]{\mathrel{\overset{\makebox[2pt]{\mbox{\normalfont\tiny\sffamily #1}}}{=}}}
+\renewcommand{\chi}{\mathcal{X}}
+\newcommand{\opl}{\boldsymbol{\oplus}}
+\renewcommand{\emptyset}{\varnothing}
+\newcommand{\subs}{\leq}
+\newcommand{\sleq}{\leqslant}
+\newcommand{\sgeq}{\geqslant}
+\newcommand{\snq}{\subsetneq}
+%\newcommand{\qed}{$\square$}
+\newcommand{\bk}{\backslash}
+\newcommand{\tick}{$\checkmark$}
+\newcommand{\cross}{$\times$}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\F}{\mathbb{F}}
+\newcommand{\Fc}{\mathcal{F}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\Ex}{\mathbb{E}}
+\newcommand{\PP}{\mathbb{P}}
+\newcommand{\tr}{\text{tr}}
+\newcommand{\Sp}{\text{Sp}}
+\newcommand{\blnk}{\underline{\;\;}\,}
+\newcommand{\alnk}{\,\underline{\;\;}\,}
+\newcommand{\spn}[1]{\left\langle #1 \right\rangle}
+\newcommand{\spb}{\spn{\;,\,}}
+\newcommand{\sign}{\text{sign }}
+\newcommand{\sett}[1]{\left\lbrace #1 \right\rbrace}
+\newcommand{\tint}{\textstyle{\int}}
+\newcommand{\im}{\text{Im }}
+\newcommand{\cof}{\text{cof }}
+\newcommand{\nin}{\not\in}
+\newcommand{\nn}{$n \times n$ }
+\newcommand{\nequiv}{\not\equiv}
+\newcommand{\sm}[1]{$\begin{smallmatrix}#1\end{smallmatrix}$}
+\newcommand{\smp}[1]{\left(\begin{smallmatrix}#1\end{smallmatrix}\right)}
+\newcommand{\mx}[1]{\begin{matrix}#1\end{matrix}}
+\newcommand{\pmx}[1]{\begin{pmatrix}#1\end{pmatrix}}
+\newcommand{\dmx}[1]{\left|\;\begin{matrix}#1\end{matrix}\;\right|}
+\newcommand{\fd}{\dfrac{dy}{dx}}
+\newcommand{\sd}{\dfrac{d^2y}{dx^2}}
+\newcommand{\tth}{$^{\text{th }}$}
+\newcommand{\mytitle}{
+	\title{Algebra I}
+	\vspace{-0.12cm}
+	\line
+	\leftright{\verb|Michaelmas 2013|}{\verb|Stephen Thatcher|}
+	\vspace{-15pt}
+	}
+\newcommand{\mytitletwo}{
+	\leftright{\small{\verb|Algebra I - Lecture Notes|}}{\small{\verb|Stephen Thatcher|}}
+	\vspace{-15pt}
+	}
+	
+%symbol footnotes
+\long\def\sfn[#1]#2{\begingroup%
+\def\thefootnote{\fnsymbol{footnote}}\footnote[#1]{#2}\endgroup}
+
+%footnote alignment
+\makeatletter
+\renewcommand\@makefntext[1]{\leftskip=2em\hskip-0.5em\@makefnmark#1}
+\makeatother
+	
+% -- Adjust Page Margins
+\addtolength{\textwidth}{0cm}
+\addtolength{\hoffset}{-0cm}
+\addtolength{\textheight}{4.5cm}
+\addtolength{\voffset}{-2cm}
+\numberwithin{equation}{subsection}
+
+\theoremstyle{plain}
+\newtheorem{thm}{Theorem}[chapter] % reset theorem numbering for each chapter
+
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[chapter]
+\newtheorem{ch}{Challenge}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{cor}[thm]{Corollary}
+
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem{exmp}{Example}[chapter]
+\newtheorem*{prf}{Proof}
+
+\makeatletter
+\renewenvironment{prf}[1][\proofname]{\par
+  \vspace{-\topsep}% remove the space after the theorem
+  \normalfont
+  \topsep0pt \partopsep0pt % no space before
+  \trivlist
+  \item[\hskip\labelsep
+        \itshape
+    #1\@addpunct{.}]\ignorespaces
+}{%
+  \popQED\endtrivlist\@endpefalse
+  \addvspace{6pt plus 6pt} % some space after
+}
+\makeatother
+
+\newcommand{\pr}[1]{\begin{adjustwidth}{1cm}{} \begin{prf} #1 \end{prf} \end{adjustwidth}}
+
+\usepackage{polynom}
+
+\polyset{%
+  style=C,
+  delims={\big(}{\big)},
+  div=\div
+}
+
+\reversemarginpar
+
+%\end{foo}
+
+
+\begin{document}
+\setlength{\parindent}{0pt}
+\begin{titlepage}
+\resizebox{6cm}{!}{\bfseries Algebra I}\\[18pt]
+\resizebox{5cm}{!}{\bfseries Lecture Notes}
+\vfill
+
+\subsection*{Syllabus}
+
+Definition of an abstract vector space over an arbitrary field. Examples. Linear maps. Division Algorithm in $ F[x] $. Characteristic polynomials and minimal polynomials. Coincidence of roots. [2]
+
+Quotient vector spaces. The first isomorphism theorem for vector spaces and rank-nullity. Induced linear maps. Applications: Triangular form for matrices over $ \mathbb{C} $. Cayley-Hamilton Theorem. [2.5]
+
+Bezout's Lemma in $ F[x] $. Primary Decomposition Theorem. Diagonalizability and Triangularizability in terms of minimal polynomials. Proof of existence of Jordan canonical form over $ \mathbb{C} $ (using primary decomposition and inductive proof of form for nilpotent linear maps). [3.5]
+
+Dual spaces of finite-dimensional vector spaces. Dual bases. Dual of a linear map and description of matrix with respect to dual basis. Natural isomorphism between a finite-dimensional vector space and its second dual. Annihilators of subspaces, dimension formula. Isomorphism between $ U^* $ and $ V^* / U^\circ $. [3]
+
+Recap on real inner product spaces. Definition of non-degenerate symmetric bilinear forms and description as isomorphism between $ V $ and $ V^* $. Hermitian forms on complex vector spaces. Review of Gram-Schmidt. Orthogonal Complements. [2]
+
+Adjoints for linear maps of inner product spaces. Uniqueness. Concrete construction via matrices [1]
+
+Definition of orthogonal/unitary maps. Definition of the groups $ O_n, SO_n,U_n, SU_n $. Diagonalizability of self-adjoint and unitary maps. [2]
+
+\vfill
+\subsubsection*{Stephen Thatcher \\Ed. Sam Adam-Day \hfill Lecturer: Prof Ulrike Tillmann}
+\end{titlepage}
+
+\tableofcontents
+
+\newpage
+
+\chapter{Vector Spaces}
+Let $\F$ be a field, then both $(\F, + , 0)$ and $(\F \bk \{0\}, \times, 1)$ are abelian groups and the distribution law holds:
+$$\forall a,b,c \in \F : a(b+c) = ab + ac$$
+The smallest integer $p$ such that
+$$\underbrace{1 + 1 + \cdots + 1}_{p \text{ times}} = 0$$
+is called the \textbf{characteristic} of $\F$.\\
+If no such $p$ exists, then $\F$ is said to have \textbf{characteristic zero}.
+
+\begin{exmp} Characteristic zero: $\Q, \R, \C, \Q \cup \{ i \}$ \end{exmp}
+\begin{exmp} Characteristic p: $\{ 0, 1, \ldots, p \}$ \end{exmp}
+
+A \textbf{vector space} $V$ over a field $\F$ is an abelian group $(V, +, \underline{0})$ together with scalar multiplication $\F \times V \rightarrow V$ such that for all $a, b \in \F$, $v,w \in V$:
+\begin{enumerate}[(1) ]
+\item $a (v + w) = av + aw$
+\item $(a + b) v = av + bv$
+\item $(ab) v = a (bv)$
+\item $1v = v$
+\end{enumerate}
+
+\begin{defn} A set $S \subset V$ is \textbf{Linearly Independent} if for all $a_i \in \F, s_i \in S$:
+$$ a_1 s_1 + a_2 s_2 + \cdots + a_n s_n = 0 \Rightarrow a_i = 0 \forall i $$
+\end{defn}
+
+\begin{defn} A set $S \subset V$ is \textbf{Spanning} if for all $v \in V$ there exists $a_i \in \F$ and $S_i \in S$ such that
+$$ v = a_1 s_1 + a_2 s_2 + \cdot + a_n s_n $$
+\end{defn}
+
+\begin{defn} $S$ is a basis of $V$ if $S$ is \textbf{spanning and linearly independent} \end{defn}
+
+\begin{defn} The span of $S$ is the smallest vector space containing $S$ \end{defn}
+
+\begin{exmp}${}$
+\begin{enumerate}
+\item[] $V = \F^n$ with \textbf{standard basis} $\{(1, 0, \ldots, 0), \ldots, (0, 0, \ldots, 1)\}$
+\item[] $V = \F[x]$ with \textbf{standard basis} $\{1, x, x^2, \ldots, x^n, \ldots\}$
+\item[] $V = \N^\R = \{(a_0, a_1, \ldots) : a_i \in \R\}$
+\item[] $V \supset S = \{(1, 0, \ldots), (0, 1, 0, \ldots), \ldots, (0, \ldots, 0, 1, 0, \ldots), \ldots)$\\ \hspace*{1cm} $S$ is an infinite \textbf{linearly independent} subset\\ \hspace*{1cm} Note that Span$(S) \neq V$ as $(1, 1, \ldots, 1) \nin$ Span$(S)$ - no finite sum
+\end{enumerate}
+\end{exmp}
+
+Suppose $V$ and $W$ are vector spaces over $\F$
+\begin{defn} A \textbf{map} $T: V \to W$ is a \textbf{linear transformation} if for all $a \in \F, v, v' \in V$ $$T(av + v') = a Tv + Tv'$$ \end{defn}
+
+\begin{defn} A \textbf{bijective} linear transformation is a linear \textbf{isomorphism} of vector spaces \end{defn}
+
+\begin{exmp}
+$T: \R[x] \to \R[x]$ given by $f(x) \mapsto x f(x)$\\
+\begin{align*}
+T(af(x) + g(x)) 	&= x(af(x) + g(x))\\
+					&= axf(x) + xg(x)
+					&= aT(f(x)) + T(g(x))
+\end{align*}
+$T$ is \textbf{injective} and defines a \textbf{linear isomorphism} from $\R[x]$ to $x \R[x]$ the subspace of polynomials with zero constant term: $x \R[x] \lneq \R[x]$\\
+$W \leq \N^\R \to \R[x]$ given by $e_i = \underbrace{(0, 0, \ldots, 1, 0, \ldots)}_{1 \text{ in the i$^{\text{th}}$ place}} \mapsto x^i$ defines a linear isomorphism
+\end{exmp}
+
+\begin{ch} Prove that there is no isomorphism $T: W \to V = \N^\R$. Hence, $V$ has no countable basis \end{ch}
+
+\begin{rem} 
+Every linear map $T: V \to W$ is determined by its values on a basis $\mathcal{B}$ of $V$ (since $\mathcal{B}$ is a spanning set of $V$). Indeed, can be determined by any spanning set. Given any map $T: \mathcal{B} \to W$ we can extend to a linear transformation $T: V \to W$.
+\end{rem}
+\newpage
+
+Let Hom$(V,W)$ be the set of linear transformations from $V$ to $W$.\\ For $a \in \F^n, v \in V, T, S \in$ Hom$(V,W)$ define
+\begin{align*}
+(aT)(v) &= a(Tv)\\
+(S+T)(v) &= Sv + Tv
+\end{align*}
+
+\begin{lem} With these operations, Hom$(V,W)$ is a \textbf{vector space} over $\F$
+\pr{
+Assume $V$ and $W$ are finite dimensional and let $\mathcal{B} = \{e_1, \ldots, e_m\}$ and $\mathcal{B}' = \{e_1', \ldots, e_n'\}$ be bases for $V$ and $W$ respectively\\
+Denote by $_\mathcal{B'}[T]_\mathcal{B}$ the matrix $(a_{ij})$ such that $$Te_i = a_{i1} e_1' + \cdots + a_{in}e_n'$$
+Note: 	\begin{align*}
+			_\mathcal{B}[aT]_\mathcal{B} &= a _\mathcal{B'}[T]_\mathcal{B'}\\
+			_\mathcal{B'}[T+S]_\mathcal{B} &=  {_\mathcal{B'}}[T]_\mathcal{B} + {_\mathcal{B'}}[S]_\mathcal{B}
+		\end{align*}
+}
+\end{lem}
+
+\begin{thm}${}$\\
+The map that takes $T$ to $_\mathcal{B'}[T]_\mathcal{B}$ is an \textbf{isomorphism} of \textbf{vector spaces} from Hom$(V,W)$ to the $n \times m$ matrices over $\F$. Furthermore, this correspondence is compatible with composition, taking composition to multiplication of matrices:
+\pr{
+If $T: V \to W$, $S: W \to U$ with $\mathcal{B, B', B''}$ bases for $V, W, U$ respectively then
+$$_\mathcal{B''}[S \circ T]_\mathcal{B} = _\mathcal{B''}[S]_\mathcal{B'} {_\mathcal{B'}}[T]_\mathcal{B}$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%INCOMPLETE PROOF - PLEASE FINISH ME OFF%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}
+\end{thm}
+
+\chapter{Polynomials}
+\begin{defn} $\F[x]$ is the space of polynomials over a field $\F$ \end{defn}
+\begin{exmp}
+$$\polylongdiv{2x^3 + 4x^2 + 9x + 7}{x^2 - 2x}$$
+\end{exmp}
+
+\begin{prop} \textbf{(Division Algorithm for Polynomials)}\\
+Let $f(x), g(x)$ be polynomials over a field $\F$ such that $g(x) \neq 0$\\ Then, $\exists q(x), r(x) \in \F[x]$ with
+\begin{align*}
+f(x) = q(x)g(x) + r(x) \tag{with deg $r(x)$ < deg $g(x)$} 
+\end{align*}
+\end{prop}
+\pr{
+If $\deg(f) < \deg(g)$ then we take $q(x) = 0, r(x) = f(x)$ and we are done.\\ Hence we can now assume that $\deg(f) \leq \deg(g)$, then
+\begin{align*}
+f(x) &= a_nx^n + \cdots + a_1 x + a_0\\
+g(x) &= b_mx^m + \cdots + b_1 x + b_0
+\end{align*}
+with $n \leq m$. Then $\deg\left( f(x) - \frac{a_n}{b_m} x^{n-m}g(x) \right) < \deg f(x)$.\\
+Then by induction on $\deg f$ we have that 
+$$\exists s, r \in \F[x] : s(x)g(x) + r(x) = f(x) - \frac{a_n}{b_m} x^{n-m}g(x) \text{ and } \deg r < \deg g$$
+Now setting $q(x) = \frac{a_n}{b_m} x^{n-m}g(x) + s(x)$ the result follows.\qed
+}
+
+\newpage
+\begin{cor}
+For $f(x) \in \F[x], a \in \F$, if $f(a) = 0$ then $(x-a)|f(x)$
+\pr{
+By the division algorithm there exist $q,r \in \F[x]$ with $\deg r < \deg (x-a) = 1$ with $f(x) = q(x)(x-a) + r(x)$. Since $\deg r < 1$ it obtains that $r \in \F$, that is $r$ is constant, then:
+\begin{align*}
+f(x) 	&= q(x)(x-a) + r\\
+f(a)	&= q(a)(a-a) + r
+\intertext{By assumption $f(a) = 0$, hence}
+0 		&= r
+\end{align*}
+Thus $f(x) = q(x)(x-a)$ and thus $(x-a)|f(x)$ as required\\[-8pt] \qed
+}
+\end{cor}
+
+\begin{cor} If $\deg f(x) \leq n$ then $f$ has, at most $n$ roots
+\pr{
+From the above by induction
+}
+\end{cor}
+
+\begin{defn} A field $\F$ is algebraically closed if every polynomial in $\F[x]$ has a root in $\F$ \end{defn}
+
+\begin{exmp} By the fundamental theorem of algebra, $\C$ is an algebraically closed field \end{exmp}
+
+\begin{thm}
+Any field $\F$ has an algebraic closure $\overline{\F}$, which, by definition, is the smallest algebraically closed field containing $\F$.
+\end{thm}
+
+\begin{exmp}${}$
+\begin{itemize}
+\item[] 	$\R$ - not algebraically closed since $x^2 + 1$ has no real solutions - $\overline{\R} = \R \cup \{i\}$
+\item[]		$\overline{\Q} \lneq \C$ - does not require anything from $\R \bk \Q$, e.g. $\pi \nin \overline{\Q}$
+\end{itemize}
+\end{exmp}
+
+\begin{ch} Prove that no finite field is algebraically closed \end{ch}
+
+Let $A \in M_{n \times n}(\F)$ - the set of $n \times n$ matrices over $\F$\\
+Let $f(x) = a_mx^m + \ldots + a_0 \in \F[x]$\\
+Define $f(A) = a_mA^m + \ldots + a_1A + a_0I \in M_{n \times n}(\F)$
+
+\begin{rem} For $f(x), g(x) \in \F[x]$ we have $f(A) g(A) = g(A) f(A)$ \footnote{$A^k A^l = A^l A^k = A^{k+l}$ and $A(aI) = (aI)A$} \end{rem}
+\begin{rem} If for $v \in \F^n$ we have $Av = \lambda v$ for some $\lambda \in \F$ then $f(A)v = f(\lambda) v$ \footnote{$a_kA^k(v) = a_k(\lambda^k v) = (a_k \lambda^k)v$} \end{rem}
+
+\begin{lem}
+For all $A \in M_{n^2}(\F)$ there exists a polynomial $f(x) \in \F[x]$ such that $f(A) = 0 \in M_{n^2}(\F)$
+\pr{
+$\dim(M_{n^2}(\F)) = n^2 < \infty$, hence $I, A, A^2, \ldots, A^k$ must be linearly dependent for $k > n^2$.\\
+So there exists $a_i \in \F$ such that
+$$a_0I + a_1 A + \cdots + a_k A^k = 0$$
+Hence we can set $f(x) = \sum_{i=0}^k a_i x^i$ and we are done\\[-8pt] \qed
+}
+\end{lem}
+
+\newpage
+\begin{defn} A \textbf{minimal polynomial} is a \textit{monic} polynomial of least degree with $m_A(A) = 0$ \end{defn}
+
+\begin{thm}
+If $f(A) = 0$ for $f(x) \in \F[x]$, then $m_A(x) | f(x)$. Furthermore, $m_A(x)$ is unique.
+\pr{
+Suppose $f(A) = 0$ for some $f(x) \in \\F[x]$.\\ Applying polynomial long division to $f(x) \div m_A(A)$ we have that there exists $q(x), r(x) \in \F[x]$ such that $f(x) = q(x)m_A(x) + r(x)$ with $\deg r(x) < \deg m_A(x)$. Now, evaluating at $x = a$ we obtain $r(a) = 0$. Since $r$ has degree less than $m_A$, it must be identically zero, else it would contradict the choice of $m_A$ as a minimal polynomial. Thus $f(x) = q(x)m_A(x)$ and so $m_A(x) | f(x)$ as required.\\
+It follows that if there were two monic polynomials $m_A, m'_A$ such that $m_A(A) = m'_A(A) = 0$ then as they must both divide each other they must be equal, hence $m_A$ is unique.\\[-8pt]\qed
+}
+\end{thm}
+
+\begin{defn} The \textbf{characteristic polynomial} of $A \in M_{n^2}(\F)$ is given by:
+$$\chi_A(x) = \det(A - xI)$$
+\end{defn}
+
+\begin{lem} $\chi_A(x) = (-1)^n x^n + \tr A (-1)^{n-1} x^{n-1} + \cdots + \det A$
+\pr{
+We prove this result by showing that
+$$\chi_A(x) = \det \left( \begin{smallmatrix}
+a_{11} - x & \hdots & a_{1n}\\
+\scriptscriptstyle\vdots & \scriptscriptstyle\ddots & \scriptscriptstyle\vdots\\
+a_{n1} & \hdots & a_{nn}-x
+\end{smallmatrix} \right) = (a_{11} - x)\cdots(a_{nn} - x) + f(x)$$
+For some $f(x)$, a polynomial of degree at most $n-2$. We proceed by induction.\\
+\textbf{Base case: }$\boldsymbol{n=2}$\\
+When $n = 2$ we have $\chi_A(x) = (a_{11} - x)(a_{22} - x) - a_{12}a_{21}$, with $f(x) = a_{12}a_{21}$ the result follows.\\
+\textbf{Inductive case: }$\boldsymbol{n=k}$\\
+We suppose that the result holds for all $n < k$ then we can calculate $\chi_A(x)$ by expanding by minors along the first row:
+$$\chi_A(x) = (a_{11} - x) \det (A-x)_{11} - a_{12} \det (A-x)_{12} + \cdots + (-1)^{n-1} a_{1n} \det (A-x)_{1n}$$
+The first term $(a_{11} - x) \det (A-x)_{11}$ is just the characteristic polynomial of some $n-1 \times n-1$ matrix and hence by the induction hypothesis we have $$(a_{11} - x) \det (A-x)_{11} = (a_{11} - x)(a_{22} - x)\cdots(a_{nn} - x) + g(x)$$
+where $g(x)$ is some polynomial of degree at most $n-2$.\\
+For $i \neq 1$ we see that $\det (A-x)_{1i}$ is a polynomial of degree at most $n-2$ and hence setting $f(x) = g(x) - a_{12} \det(A-x)_{12} + \cdots + (-1)^{n-1} a_{1n} \det(A-x)_{1n}$ we have
+$$\chi_A(x) = (a_{11} - x)\cdots(a_{nn} - x) + f(x)$$
+with $\deg f(x) \leq n-2$ as required.\\
+Now, returning to our general case, we note that expanding out we obtain $$\chi_A(x) = (-1)^n x^n + (-1)^{n-1} x^{n-1} (a_{11} + \cdots + a_{nn}) + a_{n-2} x^{n-2} + \cdots + a_0$$
+Hence $a_n = (-1)^n$, $a_{n-1} = (-1)^{n-1} (a_{11} + \cdots + a_{nn}) = (-1)^{n-1} \tr A$ and $a_0 = \chi_A(0) = \det A$ \\[-8pt]\qed
+}
+\end{lem}
+
+\begin{thm} The following are equivalent: 
+\begin{align*}
+&(a) \;\;\; \lambda \text{ is an eigenvalue of } A \\
+&(b) \;\;\; \lambda \text{ is a root of } \chi_A(x) \\
+&(c) \;\;\; \lambda \text{ is a root of } m_A(x)
+\end{align*}
+\pr{ a $\iff$ b
+\begin{align*}
+\chi_A(\lambda) = 0 	&\iff \det(A - \lambda I) = 0\\
+						&\iff \text{$A$ is singular}\\
+						&\iff \exists v \in \F^n : (A - \lambda I)v = 0, v \neq 0\\
+						&\iff \exists v \in \F^n : Av = \lambda v, v \neq 0
+\end{align*}
+c $\Rightarrow$ a\\
+First we note that by a corollary to the division algorithm $m_A(\lambda) = 0 \Rightarrow m_A(x) = (x - \lambda) g(x)$ for some $g(x) \in \F[x]$ with $\deg g < \deg m_A$. Then by the minimality of $m_A$ it must hold that $g(A) \neq 0$. Hence there exists some $w \in \F^n$ such that $g(A) w \neq 0$, putting $v = g(A)w$ we have
+\begin{align*}
+(A - \lambda I)v 	&= (A - \lambda I)(g(A) w)\\
+					&= m_A(A) w\\
+					&= 0
+\end{align*}
+Hence $Av = \lambda v$ - $\lambda$ is an eigenvalue.\\
+a $\Rightarrow$ c\\
+Assume $\lambda$ is an eigenvalue. Then there exists a non-zero vector $v \in \F^n$ such that $Av = \lambda v$. Then
+$$m_A(\lambda)v = m_A(A) v = 0 \cdot v = 0$$ and since $v \neq 0$ we have that $m_A(\lambda) = 0$ and hence $\lambda$ is a root of $m_A(x)$\\ \qed
+}
+\end{thm}
+
+\chapter{Quotient Spaces}
+Let $V$ be a vector space over a field $\F$\\
+Let $U$ be a subspace of $V$
+
+\begin{defn} The set of cosets $V/U = \{ v + U : v \in V \}$ for a vector space, the \textbf{quotient space}, with operations:
+\begin{align*}
+(v + U) + (w + U) &= (v + w) + U\tag{$\forall v,w \in V$}\\
+a ( v + U ) &= av + U \tag{$\forall a \in \F, v \in V$}
+\end{align*}\end{defn}
+\pr{
+$( V/U, +)$ is just the quotient group associated to $V$ and $U$, hence we need only check well-definedness of scalar multiplication: first we note that $v + U = v' + U$ if and only if $v = v' + u$ for some element $u \in U$. Then,
+\begin{align*}
+a(v+ U) 	&= av + U\\
+			&= a(v' + u) + U\\
+			&= av' + au + U\\
+			&= av' + U \tag{since $U$ is a vector space it is closed under linear multipication}\\
+			&= a(v' + U)				 
+\end{align*}
+Thus all the vector space axioms are satisfied as they hold for $V$ and $U$ \\[-8pt]\qed
+}
+\newpage 
+Let $\mathcal{E}$ be a basis for $U$ and let $\mathcal{B}$ be a basis for $V$ containing $\mathcal{E}$
+
+Define $\overline{\mathcal{B}} = \{ e + U : e \in \mathcal{B} \bk \mathcal{E}\}$
+
+\begin{prop} $\overline{\mathcal{B}}$ is a basis for $V/U$
+\pr{
+Take $v + U \in V/U$\\
+As $v \in V$ there exist $a_i \in \F$, $e_1, \ldots, e_k \in \mathcal{E}$ and $e_{k+1}, \ldots, e_n \in \mathcal{B} \bk \mathcal{E}$ such that $$v = a_1 e_1 + \cdots + a_k e_k + a_{k+1} e_{k+1} + \cdots + a_n e_n$$
+Then
+\begin{align*}
+v+U 	&= a_1 e_1 + cdots + a_n e_n + U\\
+		&= a_{k+1} e_{k+1} + \cdots + a_n e_n + U \tag{$a_1 e_1 + \cdots + a_k e_k \in U$}\\
+		&= a_{k+1} (e_{k+1} + U) + \cdots + a_n (e_n + U) \in \Sp \left( \overline{\mathcal{B}} \right)
+\end{align*}
+Hence $\overline{\mathcal{B}}$ spans $V/U$, it remains to show that $\overline{\mathcal{B}}$ is linearly independent\\
+Suppose that we have $a_1(e_1 + U) + \cdots + a_n (e_n + U) = 0$ with $e_1 + U, \ldots, e_n + U \in \overline{\mathcal{B}}$ and $e_1, \ldots, e_k \in \mathcal{B} \bk \mathcal{E}$. Then
+\begin{align*}
+				&a_1 e_1 + \ldots + a_n e_n + U = U\\
+\Rightarrow	 	&a_1 e_1 + \ldots + a_n e_n \in U\\
+\Rightarrow		&a_1 e_1 + \ldots + a_n e_n = b_1 e'_1 + \ldots + b_k e'_k \tag{$b_i \in \F, e'_i \in \mathcal{E}$}\\
+\Rightarrow 	&a_1 = \cdots = a_n = b_1 = \cdots = b_k = 0 \tag{$\mathcal{E}$ is linearly independent}\\
+\Rightarrow		&\overline{\mathcal{B}} \text{ is linearly independent}
+\end{align*}
+}\end{prop}
+
+\begin{exmp}${}$
+\begin{itemize}
+\item[] $V = \F[x]$ : $\mathcal{B} = \{1, x, x^2, \ldots\}$
+\item[] $U =$ even polynomials : $\mathcal{E} = \{1, x^2, x^4, \ldots\}$
+\item[] $V/U =$ odd polynomials : $\overline{\mathcal{B}} = \{x + U, x^3 + U, \ldots \}$\\
+\end{itemize}
+\end{exmp}
+
+\begin{cor} If $V$ is finite dimensional, then $$\dim V = \dim U + \dim V/U$$ \end{cor}
+
+\newpage
+
+\begin{thm} \textnormal{\textbf{First Isomorphism Theorem (For Vector Spaces)}}\\
+Let $T: V \to W$ be a linear transformation of vector spaces. Then,
+\begin{align*}
+\overline{T} : V/\ker T &\to \im T\\
+				v + \ker T &\mapsto T(v)
+\end{align*}
+is a linear isomorphism
+\end{thm}
+\pr{
+We first show that $\overline{T}$ is well defined.\\ Suppose $v + \ker T = v' + \ker T$, then $v = v' + k$ for some $k \in \ker T$ and hence:
+\begin{align*}
+\overline{T}(v + \ker T) 	&= T(v)\\
+							&= T(v' + k)\\
+							&= T(v') + T(k)\\
+							&= T(v')\\
+							&= \overline{T}(v' + \ker T)
+\end{align*}
+Moreover, $\overline{T}$ is a homomorphism since
+\begin{align*}
+\overline{T}\big(a(v + \ker T) + (v' + \ker T)\big) 	&= \overline{T}(av + v' + \ker T)\\
+														&= T(av + v')\\
+														&= aT(v) + T(v')\\
+														&= a \overline{T}(v + \ker T) + \overline{T}(v' + \ker T)
+\end{align*}
+Now, $\overline{T}$ is injective as it has a trivial kernel:
+\begin{align*}
+\overline{T}(v + \ker T) = 0 	&\iff T(v) = 0\\
+								&\iff v \in \ker T\\
+								&\iff v + \ker T = \ker T \tag{Since $\ker T$ is a vector subspace}
+\end{align*}
+Finally, $\overline{T}$ is surjective as its image is $\im T$. \\[-8pt]\qed
+}
+
+\begin{cor} \textbf{Rank-Nullity Theorem}\\
+If $T: V \to W$ is a linear map and $V$ is a finite dimensional vector space then $$\dim V = \dim \ker T + \dim \im T$$
+\pr{
+We take $U = \ker T$ and apply Corollary 3.2.
+\begin{align*}
+\dim V	&= \dim U + \dim V/U\\
+		&= \dim \ker T + \dim V/\ker T\\
+		&= \dim \ker T + \dim \im T \tag{By First Isomorphism Theorem}\\
+\end{align*} \qed
+}
+\end{cor}
+
+\begin{exmp} Let $V = \R^3$ and $U = \spn{\smp{1\\1\\1}}$, then $$\dim V/U = \dim V - \dim U = 3 - 1 = 2$$
+A basis for $V/U$ is given by $\mathcal{B} = \left\{ \smp{0\\0\\1} + U, \smp{0\\1\\1} + U \right\}$\\ We can visualise $V/U$ as the space of lines parallel to $U$. \end{exmp}
+
+Let $T: V \to W$ be a linear map and let $A \subset V$ and $B \subset W$ be subspaces.
+
+\begin{lem} The formula $\overline{T}(v + A) := T(v) + B$ defines a linear map $\overline{T} : V/A \to W/B$ if and only if $T(A) \subseteq B$ \end{lem}
+
+\pr{
+Assume $T(A) \subset B$. Then $\overline{T}$ will be linear if well defined.\\ Let $v + A = v' + A$\\ Then $v = v' + a$ for some $a \in A$
+\begin{align*}
+\overline{T}(v + a)		&= T(v) + B\\
+						&= T(v' + a) + B\\
+						&= T(v') + T(a) + B\\
+						&= T(v') + B \tag{$T(a) \in B$}\\
+						&= \overline{T}(v' + A)
+\end{align*}
+Conversely, assume $\exists a \in A : T(a) \nin B$, then:
+\begin{align*}
+B = \overline{T}(A) 	&= \overline{T}(a + A)\\
+						&= T(a) + B\\
+						&\Rightarrow T(a) \in B \tag{CONTRADICTION}
+\end{align*}
+}\qed
+
+Let $\mathcal{B} = \{ e_1, \ldots, e_n \}$ be a basis for $V$ containing $\mathcal{E} = \{ e_1, \ldots, e_k \}$, a basis for $A$.\\
+Let $\mathcal{B'} = \{ e_1', \ldots, e_m' \}$ be a basis for $W$ containing $\mathcal{E'} = \{ e_1', \ldots, e_l' \}$ a basis for $B$.\\
+
+\begin{prop} Assume $T: V \to W$ satisfies $T(A) \subset B$, then $T$ can be restricted to a linear map $T|_A : A \to B$ by $a \mapsto T(a)$.\\
+Then we have the following block matrix composition of $T$:
+
+$$_\mathcal{B'}[T]_\mathcal{B} = \pmx{_\mathcal{E'}[T|_A]_\mathcal{E} & \star \\ 0 & _{\overline{\mathcal{B}}'}\big[\overline{T}\big]_{\overline{\mathcal{B}}}}$$
+
+\begin{rem} 
+\begin{align*}
+\overline{T} (e_j + A) 	&= T(e_j) + B\\
+							&= a_{1j}e_1' + \cdots + a_{mj}em' + B\\
+							&= a_{l+1,j}e_{l+1}' + \cdots + a_{mj}e_m' + B \tag{$a_{1j}e_j' + \cdots + a_{lj}e_l \in B$}\\
+							&= (a_{l+1,j}e_{l+1,j} + B) + \cdots + (a_{mj}e_m' + B)
+\end{align*}
+\end{rem}
+\end{prop}
+
+\chapter[Triangular Form and Cayley-Hamilton Theorem]{Triangular Form and\\ Cayley-Hamilton Theorem}
+Let $T: V \to V$ be a linear transformation. A subspace $U \subseteq V$ is called \textbf{T-invariant} if $T(U) \subseteq U$.\\
+Let $S: V \to V$ be another transformation.
+
+\begin{lem} If $U$ is $T-$ and $S-$ invariant, then it is also invariant in the following:
+\begin{enumerate}[(1) ]
+\item \textbf{zero map}, since $U \leq V$ we have $0 \in U$
+\item \textbf{identity map}, clearly $U \subseteq U$
+\item $\boldsymbol{aT}$ \textbf{for any} $\boldsymbol{a \in \F}$, $U$ subspace $\rightarrow$ closed under scalar multiplication
+\item $\boldsymbol{S + T}$, $S(U), T(U) \in U$, $U$ closed under addition
+\item $\boldsymbol{T \circ S}$, $S(U) \in U \Rightarrow T(S(U)) \subseteq T(U) \subseteq U$
+\end{enumerate} \end{lem}
+
+In particular, $U$ in invariant for any $\rho(T)$ where $\rho(x) \in \F[x]$. Moreover, $\rho(T)$ restricts to a map $U \to U$ and also induces a linear map of quotient spaces: $$\overline{\rho(T)} : V/U \to V/U$$
+
+\begin{exmp} If $\lambda$ is a root of characteristic polynomial, $\chi_T(x)$, then $\exists v \in V$ with $v \neq 0$ such that $Tv = \lambda v$. Then $\spn{v}$ is $T-$invariant. \end{exmp}
+
+\begin{rem} More generally, $V_\lambda := \ker(T - \lambda I)$, the $\boldsymbol{\lambda}$\textbf{-eigenspace} of $T$ is $T-$invariant \end{rem}
+
+\textbf{Recall:} $\mathcal{E}$ basis for $U$, $\mathcal{B}$ basis for $V$, with $\mathcal{E} \subseteq \mathcal{B}$. The $\overline{\mathcal{B}} = \{ v + U : v \in \mathcal{B}/\mathcal{E} \}$ is a basis for $V/U$ with 
+
+$$_\mathcal{B}[T]_\mathcal{B} = \pmx{ _\mathcal{E}[T|_U]_\mathcal{E} & \star \\ 0 & _{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}}}$$
+
+\begin{rem} 
+Determinant is independent of basis:\\
+Say $P^{-1}AP = B$, then
+\begin{align*}
+\det(B - xI) 	&= \det(P^{-1}AP - xI)\\
+				&= \det(P^{-1}(A - xI)P)\\
+				&= \det(P^{-1}) \det(A - xI) \det(P)\\
+				&= \frac{\det(A - xI) \det(P)}{\det(P)}\\
+				&= \det(A - xI)
+\end{align*}
+\end{rem}
+
+\begin{prop}
+\begin{align*}
+\chi_T(x)	&= \det \left( _\mathcal{B}[T]_\mathcal{B} - xI \right)\\
+			&= \det \left( _\mathcal{E}[T|_U]_\mathcal{E} - xI \right) \cdot \det \left( _{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}} \right)\\
+			&= \chi_{T|_U}(x) \cdot \chi_{\overline{T}}(x)
+\end{align*}
+\end{prop}
+
+\begin{rem} The relation between the minimal polynomials is not so straight forward! \end{rem}
+
+\begin{defn} $A = (a_{ij}) \in M_{n \times n}(\F)$ is upper triangular if $a_{ij} = 0$ for all $i > j$ \end{defn}
+
+\begin{thm} Let $V$ be a finite vector space and $T: V \to V$ a linear transformation. Assume that $\chi_T(x)$ is a product of linear factors. Then there exists a basis $\mathcal{B}$ for $V$ such that $_\mathcal{B}[T]_\mathcal{B}$ is upper triangular
+\end{thm}
+
+\begin{rem} If our field $\F$ is algebraically closed, such as $\C$, then the characteristic polynomial is always a product of linear factors \end{rem}
+
+\pr{
+We proceed by induction on $\dim V = n$\\
+If $n = 1$, then clearly $_\mathcal{B}[T]_\mathcal{B}$ is upper triangular for any basis $\mathcal{B}$\\
+In general, $\chi_T$ has a root $\lambda$ and hence $\exists v_1 \in V$ such that $Tv_1 = \lambda v_1$.\\
+Now, let $U = \spn{v_1}$, then $U$ is $T-$invariant. Consider $\overline{T} : V/U \to V/U$, by proposition, $\chi_{\overline{T}}(x)$ is also a product of linear factors. By the induction hypothesis, $\exists \overline{\mathcal{B}} = \{ v_2 + U, \ldots, v_n + U \}$ such that $_{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}}$ is upper-triangular. We can now put $\mathcal{B} = \{ v_1, v_2, \ldots, v_n \}$, so $\mathcal{B}$ is a basis for $V$ and 
+$$_\mathcal{B}[T]_\mathcal{B} = \pmx{ \lambda & \star \\ 0 & _{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}}}$$
+Since $_{\overline{\mathcal{B}}}[\overline{T}]_{\overline{\mathcal{B}}}$ is upper triangular then so is $_\mathcal{B}[T]_\mathcal{B}$.
+}\qed
+
+\begin{cor} If $A \in M_{n \times n}(\F)$ with characteristic polynomial a product of linear factors, then there exists $P$ such that $P^{-1}AP$ is upper-triangular \end{cor}
+
+\newpage
+
+\begin{prop} 
+Let $A$ be an upper-triangular matrix with diagonal entries $\lambda_1, \ldots, \lambda_n$.\\
+Then $(A - \lambda_1 I) \cdots (A - \lambda_n I) = 0$ 
+
+\pr{
+Let $e_1, \ldots, e_n$ be the standard basis for $\F^n$.\\
+$(A - \lambda_n I)v \in \spn{e_1, \ldots, e_{n-1}}$ for all $v \in V$\\
+More generally,\\
+$(A - \lambda_1 I)w \in \spn{e_1, \ldots, e_{i-1}}$ for all $w \in \spn{e_1, \ldots, e_i}$
+\todo[inline, color=green!30]{Why... more explanation required here}
+Hence,\\
+$\underbrace{(A - \lambda_1 I)}_{\in \spn{e_1}} \underbrace{\cdots\cdots\cdots}_{\in \spn{e_1, \ldots, e_{n-2}}} \underbrace{(A - \lambda_{n-1}I)}_{\in \spn{e_1, \ldots, e_{n-1}}}(A - \lambda_n I)v$
+}\qed
+\end{prop}
+
+\begin{thm} \textnormal{\textbf{Cayley-Hamilton Theorem}}\\
+If $T: V \to V$ is a linear transformation and $V$ finite dimensional, then $\chi_T(T) = 0$ and hence $m_T(x) \div \chi_T(x)$
+\end{thm}
+\pr{
+We work over the algebraic closure $\overline{\F} \supset \F$\\
+Now, $\chi_T(x) = (x - \lambda_1) \cdots (x - \lambda_n)$ for some $\lambda_i \in \overline{\F}$.\\ By the above theorem, for some basis $\mathcal{B}$, $A = {_\mathcal{B}[}T]_\mathcal{B}$ is upper-triangular.\\
+Hence $\chi_T(T) = \chi_T(A) = (A - \lambda_1 I) \cdots (A - \lambda_n I) = 0$\\
+As the minimal polynomial divides any annihilating polynomial it must divide $\chi_T(x)$. 
+}\qed
+
+\begin{exmp}
+$$A = \pmx{ 1 & 1 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 2 & 0 \\ 0 & 0 & 0 & 2} \hspace*{1cm} \Longrightarrow \hspace*{1cm} \chi_A(x) = (1-x)^2(2-x)^2$$
+
+Possible minimal polynomials:
+\begin{align*}
+(x - 1)&(x - 2)  & (A - I)(A - 2I) \neq 0\\
+(x - 1)&(x - 2)^2 & (A - I)(A - 2I)^2 \neq 0\\
+(x - 1)^2&(x - 2) & (A - I)^2(A - 2I) = 0
+\end{align*}
+Hence $m_A(x) = (x - 1)^2(x - 2)$
+
+\end{exmp}
+
+\chapter{The Primary Decomposition Theorem}
+
+\begin{prop}
+Let $a, b \in \F[x]$ be non-zero polynomials. Assume that $\gcd(a,b) = c \in \F[x]$.\\ Then $\exists s,t \in \F[x]$ such that 
+\begin{align*} 
+a(x)s(x) + b(x)t(x) = c(x) \tag{$*$} 
+\end{align*}
+
+\pr{
+Without loss of generality, assume that $\deg a \geq \deg b$ and $\gcd(a,b) = 1$\\
+Proceed by induction on $\deg a + \deg b$\\
+By the division algorithm for polynomials we have that there exist $q,r \in \F[x]$ such that
+$$a(x) = q(x)b(x) + r(x) \text{\;\; and \;\;} \deg r < \deg b$$
+Now, if $r(x) = 0$, then we have that $b(x) = \lambda \in \F$, some constant (since $\gcd(a,b) = 1$) and hence
+$$a(x) + b(x)\left(\frac{1}{\lambda}\right)(1 - a(x)) = 1$$
+and then we are done. So, assume now that $r \neq 0$, note:
+\begin{itemize}
+\item $\deg r + \deg b < \deg a + \deg b$ \hfill(since $\deg r < \deg b \leq \deg a$)
+\item $\gcd(a,b) = 1 \Longrightarrow \gcd(r,b) = 1$
+\end{itemize}
+Hence, by the induction hypothesis, there exists $s', t' \in \F[x]$ such that
+$$b(x)s'(x)+ r(x)t'(x) = 1$$
+Then, by $(*)$ we have
+\begin{align*}
+b(x)s'(x) + \big( a(x) - q(x)b(x) \big) t'(x) &= 1\\
+a(x)t'(x) + b(x) \left( s'(x) - q(x) t'(x) \right) &= 1
+\end{align*}
+Hence setting $s = t'$ and $t = s' - qt$ we are done.
+}\qed
+\end{prop}
+
+\newpage
+
+\begin{rem} Direct Sum Decompositions:
+\begin{itemize}
+\item $V = W_1 \opl \cdots \opl W_r$ is the direct sum of subspaces $W_i$ if every $v \in V$ can be written as $v = w_1 + \cdots + w_r$ with $w_i \in W_i$ in a unique way
+
+\item Let $\mathcal{B}_i$ be a basis for $W_i$ for $i = 1, \ldots, r$\\ Then $\bigcup_i \mathcal{B}_i = \mathcal{B}$ is a basis for $V = \bigoplus_i W_i$
+\end{itemize}
+\end{rem}
+
+\textbf{From now on we assume that $\boldsymbol{\dim V < \infty}$}
+
+Let $T: V \to V$ be a linear transformation such that $W_i$ is $T-$invariant: $T(W_i) \subseteq W_i$ for all $i$.\\
+Then,
+\[
+_\mathcal{B}[T]_\mathcal{B} = \pmx{A_1 \\ & A_2 \\ & & \ddots \\ & & & A_r }
+\text{ where } A_i = {_{\mathcal{B}_i}[}T|_{W_i}]_{\mathcal{B}_i}
+\]
+
+Also note that:
+$$ \chi_T (x) = \chi_{T|_{W_1}}(x) \times \cdots \times \chi_{T|_{W_r}}(x) $$
+
+\begin{prop} Assume $f(x) = a(x)b(x)$ with $\gcd(a,b) = 1$ and $f(T) = 0$.\\ Then $V = \ker a(T) \opl \ker b(T)$ is a $T-$invariant direct sum decomposition 
+
+\pr{
+Suppose that $v \in \ker a(T)$\\
+Then
+\begin{align*}
+a(T)(Tv) 	&= (a(T)T)(v)\\ 	
+			&= (Ta(T))(v)\\
+			&= T(a(T)(v))\\
+			&= T(\boldsymbol{0}) = \boldsymbol{0}
+\end{align*}
+
+Hence $Tv \in \ker a(T)$ and so $\ker a(T)$ (and similarly $\ker b(T)$) is $T-$invariant.\\
+By Proposition 5.1. there exist $s,t \in \F[x]$ with $as + bt = 1$
+\begin{align*}
+&\Rightarrow a(T)s(T) + b(T)t(T) = \mathrm{Id_v}\\
+&\Rightarrow v = \mathrm{Id_v}(v) = a(T)s(T)v + b(T)t(T)v \tag{$*$}
+\end{align*}\vspace*{-32pt}
+
+Moreover, for all $v \in V$ we have
+\begin{align*}
+b(T)[(a(T)s(T))(v)] &= s(T)[a(T)b(T)(v)]\\
+					&= s(T)f(T)(v) \tag{$ab = f$}\\
+					&= s(T) \cdot \boldsymbol{0} \tag{$f(T) = 0$}\\
+					&= \boldsymbol{0}
+\end{align*}
+
+Hence $a(T)s(T) \in \ker b(T)$, and similarly $b(T)t(T) \in \ker a(T)$ such that $V = \ker a(T) + \ker b(T)$.
+
+It remains to show that $\ker a(T) \cap \ker b(T) = \{ 0 \}$
+
+Suppose that $v \in \ker a(T) \cap \ker b(T)$, then
+\begin{align*}
+v 	&= a(T)s(T)v + b(T)t(T)v \tag{by $*$}\\
+	&= \hspace{22pt} \boldsymbol{0} \hspace{21pt} + b(T)t(T)v \tag{$v \in \ker a(T)$}\\
+	&= \hspace{22pt} \boldsymbol{0} \hspace{21pt} + \hspace{22pt} \boldsymbol{0} \tag{$v \in \ker b(T)$}\\
+	&= \hspace{22pt} \boldsymbol{0}
+\end{align*}
+
+Thus $V = \ker a(T) \opl \ker b(T)$ as required
+
+}\qed
+\end{prop}
+
+\begin{rem}
+If $f(x) = m_T(x)$ is the minimal polynomial of $T$ in the above proposition, then we obtain:
+$$m_{T|_{\ker a(T)}}(x) = a(x) \hspace*{50pt} m_{T|_{\ker b(T)}}(x) = b(x)$$
+\hspace{38pt} and
+$$m_T(x) = m_{T|_{\ker a(T)}}(x) \cdot m_{T|_{\ker b(T)}}(x) = a(x)b(x)$$
+
+\pr{
+Call $m_1(x) = m_{T|_{\ker a(T)}}(x)$ and $m_2(x) = m_{T|_{\ker b(T)}}(x)$.
+
+By definition $a$ is annihilating for $\ker a(T)$ so $m_1 | a$, similarly $m_2 | b$\\
+Further, for any $v \in V$ there exists $w_1 \in \ker a(T), w_2 \in \ker b(T)$ with $v = w_1 + w_2$, thus:
+\begin{align*}
+m_1(T)m_2(T) v	&= m_1(T)m_2(T) w_1 + m_1(T)m_2(T) w_2\\
+				&= \hspace{35pt} 0 \hspace{34pt} + m_1(T)m_2(T) w_2 \tag{$m_1(T)$ annihilates $\ker a(T)$}\\
+				&= \hspace{35pt} 0 \hspace{34pt} + \hspace{35pt} 0 \hspace{34pt} \tag{$m_2(T)$ annihilates $\ker b(T)$}
+\end{align*}
+
+Hence $m_1(T)m_2(T) = 0$ and so $m|m_1m_2$
+
+By degree and minimality we have $m = m_1 \cdot m_2 = ab$ with $m_1 = a$ and $m_2 = b$.
+}\qed
+\end{rem}
+
+\newpage
+
+\begin{thm}\textnormal{\textbf{Primary Decomposition Theorem}}\\
+Assume that the minimal polynomial has the form
+$$m_T(x) = f_1(x)^{m_1} \cdots f_r(x)^{m_r}$$
+Where the $f_i$ are distinct irreducible monic polynomials\\
+Put $W_i = \ker f_i(T)^{m_i}$, then
+\begin{itemize}
+\item $W_i$ is $T-$invariant
+\item $V = W_1 \opl \cdots \opl W_r$
+\item $m_{T|_{W_i}} = f_i(x)^{m_i}$
+\end{itemize}
+
+\pr{
+Put $a = f_1 \cdots f_{r-1}$ and $b = f_r$ and proceed by induction using Proposition 5.2.
+}\qed
+\end{thm}
+
+\begin{rem}${}$
+\begin{itemize}
+\item Given $m_t(x) = f_1(x)^{m_1} \cdots f_r(x)^{m_r}$ as in the theorem, $$\chi(x) = f_1(x)^{n_1} \cdots f_r(x)^{n_r} \text{ with } n_i \geq m_i$$
+\pr{
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%% FILL ME IN PLEASE!!! %%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+}\vfill
+\item 	$T$ is triagonalizable\\
+		$\Leftrightarrow$ $\chi_T$ factors as a product of linear polynomials\\
+		$\Leftrightarrow$ each $f_i$ is linear\\
+		$\Leftrightarrow$ $m_T$ factors as a product of linear polynomials
+\end{itemize}
+\end{rem}
+
+
+
+\newpage
+
+Let $T: V \to V$ be a linear map on a finite dimensional vector space
+\begin{thm} $T$ is diagonalizable $\iff$ $m_T$ factors as a product of distinct linear polynomials
+
+\pr{${}$
+\begin{itemize}
+\item[$\Leftarrow$] Assume $m_T(x) = (x - \lambda_1) \cdots (x - \lambda_n)$ for some $\lambda_i \neq \lambda_j$\\
+By Primary Decomposition Theorem we have
+\begin{align*}
+V &= \ker(T - \lambda_1 I) \opl \cdots \opl \ker(T - \lambda_n I)\\
+  &= E_{\lambda_1} \opl \cdots \opl E_{\lambda_n}
+\end{align*}
+is the direct sum of the eigenspaces\\
+Let $\mathcal{B}_i$ be a basis for $E_{\lambda_i}$: $\mathcal{B} = \cup_i \mathcal{B}_i$ is a basis for $V$ and $_\mathcal{B}[T]_\mathcal{B} = \pmx{\lambda_1 \\ & \ddots \\ && \lambda_n}$ is diagonal \todo[inline, color=red!15]{Note that the $\lambda_i$ may be repeated many times}
+
+\item[$\Rightarrow$] $T$ is diagonal $\rightarrow$ $\exists \mathcal{B}$ a basis of eigenvectors and every $v \in V$ is $v = \sum_i a_i v_i$ for these eigenvectors $v_i$.
+
+Define $f(x) = (x - \lambda_1) \cdots (x - \lambda_n)$, with $\lambda_i$ the distinct eigenvalues of the $v_i$. Then $f(T) = 0$ since $f$ annihilates every element of $\mathcal{B}$. Now, since we must have $m_T | f$ then $m_T = f$, a product of distinct linear factors.
+\end{itemize}\qed
+
+}
+
+\end{thm}
+
+\begin{exmp}
+$P$ is a projection $\iff$ $P^2 = P$ $\iff$ $P^2 - P = P(P - I) = 0$\\
+$$\Longrightarrow m_P(x) = 
+\begin{cases}	
+	x(x-1) & V = E_0 + E_1, \exists \mathcal{B} : {_\mathcal{B}[}P]_\mathcal{B} = \smp{0&0\\0&I}\\
+	x & P = 0\\
+	(x - 1) & P = I
+\end{cases}$$
+										
+\end{exmp}
+
+\begin{exmp}
+Suppose $A = \smp{1 & -1 \\ 1 & 1}$ and $\chi_A = (1-x)^2 + 1 = x^2 - 2x + 2$, then:
+\begin{align*}
+(1)\;\; \F = \R 	&\Longrightarrow \text{no roots}\\
+		&\Longrightarrow \chi_A(x) = m_A(x)\\
+		&\Longrightarrow \text{not triangulizable}\\\\
+(2)\;\; \F = \C	&\Longrightarrow \chi_A(x) = (x - (1+i))(x - (1-i))\\
+		&\Longrightarrow \chi_A(x) = m_A(x) \tag{distinct roots}\\
+		&\Longrightarrow \text{triangulizable and diagonalizable} \\\\
+(3)\;\; \F = \\F_5 &\Longrightarrow \chi_A(x) = (x-3)(x-4)\\
+		&\Longrightarrow \chi_A(x) = m_A(x) \tag{distinct roots}\\
+		&\Longrightarrow \text{triangulizable and diagonalizable}
+\end{align*}
+
+\end{exmp}
+
+\begin{ch} Find a basis of eigenvectors in $(\F_5)^2$ \end{ch}
+
+\chapter{Jordan Canonical Form}
+Let $V$ be finite dimensional and $T: V \to V$ a linear map
+
+\begin{defn} If $T^m = 0$ for some $m > 0$ then $T$ is \textbf{nilpotent} \end{defn}
+
+\begin{thm}
+If $T$ is nilpotent and $m_T(x) = x^m$ for some $m > 0$, then there exists a basis $\B$ of $V$ such that
+$$_\B[T]_\B = \pmx{0 & * & & \\ & \ddots & \ddots & \\ & & 0 & * \\ & & & 0} \text{ \textnormal{where} } * = 0,1$$
+
+\pr{${}$\\
+Note that $0 \subset \ker T \subset \ker T^2 \subset \cdots \subset \ker T^{m-1} \subset \ker T^m = V$\\
+Let $\B_i$ be such that $\overline{\B_i} = \{ w + \ker T^{i-1} : w \in \B_i \}$ is a basis for $\ker T^i / \ker T^{i-1}$
+\todo[inline, color = white]{{\sc Claim}$_1$: $\B = \bigcup_i \B_i$ is a basis for $V$}
+\pr{
+Since $V$ is finite dimensional we have $\dim V = \dim U + \dim V/U$
+\begin{align*}
+\dim V = \dim T^m 	&= \dim T^m/T^{m-1} + \dim T^{m-1}\\
+					&= \dim T^m/T^{m-1} + \dim T^{m-1}/T^{m-2} + \dim T^{m-2}\\
+					&\cdots \\
+					&= \dim T^{m}/T^{m-1} + \ldots + \dim T^2/T + \dim T/\{0\} \\
+					&= \dim \overline{\B_m} + \cdots + \dim \overline{\B_2} + \dim \overline{\B_1}\\
+					&= \dim \B_m + \cdots + \dim \B_2 + \dim B_1
+\end{align*}
+$$\underbrace{\underbrace{\underbrace{\B_1}_{\ker T} \cup \; \B_2}_{\ker T^2} \cup \cdots \cup \B_m}_{\ker T^m = V}$$
+}
+\newpage
+\todo[inline, color = white]{{\sc Claim}$_2$: $\{Tw + \ker T^{i-1} : w \in \B_{i+1} \} \subset \ker T^i / \ker T^{i-1}$ is linearly independent}
+\pr{${}$\\
+Assume $\displaystyle \sum_{s=1}^i a_s (Tw_s + \ker T^{i-1}) = \ker T^{i-1}$
+\begin{enumerate}[$\Longrightarrow$]
+\item $\sum_s a_s Tw_s \in \ker T^{i-1}$
+\item $T \sum_s a_s w_s \in \ker T^{i-1}$
+\item $\sum_s a_s w_s \in \ker T^i$
+\item $\sum_s a_S (w_s + \ker T^i) = \ker T^i$
+\item $a_s = 0$ for all $s$ as $\overline{\B_{i+1}}$ is a basis for $\ker T^{i+1}/\ker T^i$
+\end{enumerate}
+}
+Now, we can inductively find $\mathcal{E}_i = \{w_1^i, \ldots, w_k^i \}$ such that $\B_i = \mathcal{E}_i \sqcup T(\B_{i+1})$ with $\overline{\B_i}$ a basis for $\ker T^i / \ker T^{i+1}$ as above. Such $\mathcal{E}_i$ exist as, by {\sc Claim}$_2$, $T(\B_{i+1})$ is linearly independent.
+
+Then, by {\sc Claim}$_1$, we have that $\B = \bigcup_i \B_i$ is a basis for $V$ and furthermore:
+$$_\B[T]_\B = \pmx{A_1 & & \\ & \ddots & \\ & & A_s}$$
+is a block diagonal matrix with $|\mathcal{E}_i|$ Jordan blocks of size $i$ with the form:
+$$\mathcal{J}_i = \underbrace{\pmx{0 & 1 & & \\ & \ddots & \ddots & \\ & & 0 & 1 \\ & & & 0}}_i \left. \begin{matrix}\\\\\\\\\end{matrix}\right\} i$$
+}\vspace*{-8pt}\qed
+\end{thm}
+\vspace*{-8pt}
+\begin{thm}
+If $T$ is nilpotent and $m_T(x) = x^m$ for some $m$ then there exists a basis $\B$ such that $_\B[T]_\B$ is block diagonal with blocks equal to 
+$$\mathcal{J}_i = \underbrace{\pmx{0 & 1 & & \\ & \ddots & \ddots & \\ & & 0 & 1 \\ & & & 0}}_i \left. \begin{matrix}\\\\\\\\\end{matrix}\right\} i$$
+of size $i \leq m$, with at least one block of size $m$.
+
+\pr{
+Follows from above that we can write the matrix in block diagonal form, since the minimal polynomial is $x^m$ it is clear that $\ker T^m / \ker T^{m-1}$ has dimension at least one, which is to say $|\mathcal{E}_m| \geq 1$ and so there must be at least Jordan block of size $m$.
+}\qed
+\end{thm}
+
+\begin{exmp}
+Let $T: \R^3 \to \R^3$ be given by:
+$$A = \pmx{-2 & -1 & 1 \\ 14 & 7 & -7 \\ 10 & 5 & -5}$$
+Note that $A^2 = 0$ and hence $\chi_A(x) = x^3$ and $m_A(x) = x^2$.\\
+We also have: $0 \subsetneq \ker T \subsetneq \ker T^2 = \R^3$
+
+We can observe that $\ker T = \spn{\smp{1\\0\\2}, \smp{0\\1\\1}}$ and so $\dim \ker T = 2$
+
+Further, $\dim \ker T^2 / \ker T = 3 - 2 = 1$ and thus, since $w = \smp{1\\0\\0} \nin \ker T$, we have
+$$\ker T^2 / \ker T = \spn{ \smp{1\\0\\0} + \ker T} $$
+So we have $\B_2 = \mathcal{E}_2 = \{ w \} = \left\{ \smp{1\\0\\0} \right\}$
+
+Then with $\B_1 = \mathcal{E}_1 \cup T(\B_2)$ we have $T(\B_2) = \{ Tw \} = \left\{ \smp{-2\\14\\10} \right\}$ and letting $\mathcal{E}_1 = \{ u \} = \left\{ \smp{0\\1\\1} \right\}$ we see that $\B_1 = \overline{\B_1}$ is a basis for $\ker T / \{0\} = \ker T$.
+
+Hence $\B = \B_1 \cup \B_2 = \{ Tw, w, u \}$ is a basis for $\R^3$ and $$_\B[T]_\B = \pmx{0&1&0\\0&0&0\\0&0&0}$$
+\end{exmp}\vfill
+
+\begin{cor}
+If $m_T(x) = (x - \lambda)^m$ for some $m$ then there is a basis $\B$ for $V$ such that $_\B[T]_\B$ is block diagonal with blocks:
+$$\mathcal{J}_i(\lambda) = \smp{\lambda & 1 & & \\ & \ddots & \ddots & \\ & & \lambda & 1 \\ & & & \lambda}$$
+of size $i \leq m$ with at least one block of size $m$.
+
+\pr{
+$T - \lambda I$ is nilpotent with $m_{T - \lambda I}(x) = x^m$
+
+Apply theorem to get a basis $\B$ for $V$ such that
+$$_\B[T - \lambda I]_\B = \pmx{\mathcal{J}_m \\ & \ddots \\ & & \mathcal{J}_i}$$
+Then
+\begin{align*}
+_\B[T]_\B	&= {_\B[}T - \lambda I + \lambda I]_\B \\
+			&= {_\B[}T - \lambda I]_\B + {_\B[}\lambda I]_\B \\
+			&= {_\B[}T - \lambda I]_\B + \lambda I
+\end{align*}
+Which is the form required \qed
+}
+\end{cor}
+
+\newpage
+
+\begin{defn} The $\mathcal{J}_i$ are called \textbf{Jordan Blocks} \end{defn}
+
+\begin{exmp}
+Let $T: \R^3 \to \R^3$ be given by $A = \smp{3&0&1\\-1&1&-1\\0&1&2}$ \\
+
+$\chi_A (x)	= \dmx{3-x&0&1\\-1&1-x&-1\\0&1&2-x} = (2-x)^3$ \\
+
+We consider $A - 2I$:
+\begin{align*}
+A - 2I		&= \smp{1&0&1\\-1&-1&-1\\0&1&0} \\
+(A-2I)^2 	&= \smp{1&1&1\\0&0&0\\-1&-1&-1} \\
+(A-2I)^3	&= 0
+\end{align*}
+So $m_A = (x - 2)^3$ and we can read off the Jordan Form: $\smp{2&1&0\\0&2&1\\0&0&2}$
+
+To construct the basis $\B$ we first note that for $S = A - 2I$ 
+$$0 \snq \ker S \snq \ker S^2 \snq \ker S^3 = \R^3$$
+Thus $\dim \ker S^3 / \ker S^2 = 1$ and as $\smp{1\\0\\0} \nin \ker T^2$ we can set $\B_3 = \mathcal{E}_3 = \left\{\smp{1\\0\\0}\right\}$
+
+Further, $\dim \ker T^2 / \ker T = 1$ and hence $B_2 = S(\B_3) = \left\{ \smp{1\\-1\\0} \right\}$
+
+Finally we have $\dim \ker T / \{0\} = 1$ and hence $B_1 = S(\B_2) = \left\{ \smp{1\\0\\-1} \right\}$ 
+
+Hence for $\B = \left\{ \smp{1\\0\\0}, \smp{1\\-1\\0}, \smp{1\\0\\-1} \right\}$ we have
+$$_\B[T - 2I]_\B = \pmx{0&1&0\\0&0&1\\0&0&0} \Longrightarrow {_\B[}T]_\B = \pmx{2&1&0\\0&2&1\\0&0&2}$$\\
+\end{exmp}
+
+\newpage
+
+\begin{lem}
+Consider $\mathcal{J}_k(\lambda) = \smp{\lambda & 1 & & \\ & \ddots & \ddots & \\ & & \lambda & 1 \\ & & & \lambda}$ and put $V_n = (v_n^{1}, \ldots, v_n^{k})$
+
+Suppose $V_n = \mathcal{J}_k(\lambda)V_{n-1} = \left( \mathcal{J}_k(\lambda)\right)^n V_0$
+
+Then $v_n^{{k-i}} = \lambda^n v_0^{{k-i}} + {n\choose 1} \lambda^{n-1} v_0^{{k-i+1}} + \cdots + {n \choose i} \lambda^{n-1} v_0^{k}$
+
+\pr{
+By induction on $n$
+
+Base case: $n = 0$\\ ${0 \choose n} = 0$ thus, for any $i$, we have:  $v_0^{{k-i}} = \lambda^0 v_0^{{k-i}} = v_0^{k-i}$ which is clearly true
+
+Case $n$:
+\begin{align*}
+v_n^{{k-i}}	= \; &\lambda v_{n-1}^{{k-i}} + v_{n-1}^{{k-i+1}}
+\intertext{By induction hypothesis the lemma holds for $n-1$}
+				= \; &\lambda \left[ \lambda^{n-1} v_0^{{k-i}} + {n-1 \choose 1} \lambda^{n-2} v_0^{{k-i+1}} + \cdots + {n-1 \choose i} \lambda^{n-1-i} v_0^k \right]\\
+				&+ \left[ \lambda^{n-1} v_0^{{k-i+1}} + {n-1 \choose 1} \lambda^{n-2} v_0^{{k-i+2}} + \cdots + {n-1 \choose i-1} \lambda^{n-i} v_0^k \right]\\
+				= \; &\lambda^n v_0^{{k-i}} + \left[ {n-1 \choose 0} + {n-1 \choose 1} \right] \lambda^{n-1} v_0^{k-i+1} + \cdots + \left[ {n-1 \choose i-1} + {n-1 \choose i} \right] \lambda^{n-i} v_0^k
+\intertext{We now use the identity ${n-1 \choose j-1} + {n-1 \choose j} = {n \choose j}$}
+				= \; &\lambda^n v_0^{{k-i}} + {n\choose 1} \lambda^{n-1} v_0^{{k-i+1}} + \cdots + {n \choose i} \lambda^{n-1} v_0^{k}
+\end{align*}
+Which is the desired identity
+
+}\qed
+\end{lem}
+
+\chapter{Dual Spaces}
+
+\begin{defn}
+Let $V$ be a vector space over $\F$, then its \textbf{dual}, $V'$, is the vector space of maps from $V$ to $\F$. i.e. $V' = \hom(V, \F)$
+\end{defn}
+
+\begin{defn}
+The elements of $V'$ are called \textbf{linear functionals}
+\end{defn}
+
+\begin{exmp}
+Let $V = \mathcal{C}([0,1])$ be the vector space of continuous functions on $[0,1]$
+
+Then $\int: V \to \R$ given by $f \mapsto \int_0^1 f(t) dt$ is a linear functional
+\pr{
+\begin{align*}
+\tint \big( f + \lambda g \big) &= \int_0^1 \big( f + \lambda g \big) (t) dt \\
+					&= \int_0^1 \big( f(t) + \lambda g(t) \big) dt \\
+					&= \int_0^1 f(t) dt + \lambda \int_0^1 g(t) dt \\
+					&= \tint(f) + \lambda \tint(g)
+\end{align*}
+}
+\end{exmp}
+
+\begin{exmp}
+Let $V$ be the vector space of finite sequences: $V = \{ (a_0, a_1, \ldots) : \text{finitely many } a_i \neq 0 \}$
+
+Let $\bar{b} = (b_0, b_1, \ldots)$ be any sequence, then $\bar{b} \big( (a_0, a_1, \ldots) \big) = \sum_1^\infty a_ib_i$ defines a linear functional
+\pr{
+\begin{align*}
+\bar{b} \big( (a_0, a_1, \ldots) + \lambda(a'_0, a'_1, \ldots) \big)
+	&= \sum_i \big( a_i + \lambda a'_i \big) b_i \\
+	&= \sum_i a_i b_i + \lambda \sum_i a'_i b_i \\
+	&= \bar{b} \big( (a_0, a_1, \ldots) \big) + \bar{b} \big( (a'_0, a'_1, \ldots) \big)
+\end{align*}
+}
+\end{exmp}
+
+\newpage
+
+\begin{thm}
+Let $V$ be a finite dimensional vector space and let $\B = \{ e_1, \ldots, e_n \}$ be a basis for $V$
+
+For each $i$ define the dual of $e_i$ (with respect to $\B$) to be the linear functional
+$$e_i'(e_j) = \delta_{ij} = \begin{cases} 1 & j=i \\ 0 & j \neq i \end{cases} $$
+Then $\B' = \{ e_1', \ldots, e_n' \}$ is a basis for $V'$ called the \textbf{dual basis} of $\B$
+
+\begin{rem} In particular $e_i \mapsto e_i'$ defines an isomorphism from $V$ to $V'$ \end{rem}
+
+\pr{
+We first show linear independence. Assume that $\sum a_i e_i' = 0$, then
+\begin{align*}
+\sum a_i e_i' = 0	
+	&\,\;\Longrightarrow \forall j: \left( \sum a_i e_i' \right)(e_j) = 0\\
+	&\iff \forall j : \sum a_i e_i' (e_j) = 0\\
+	&\iff \forall j : a_j = 0
+\end{align*}
+
+Next we show that $\B'$ spans $V'$. Suppose $f \in V'$\\
+We put $a_i = f(e_i)$ for each $i$.\\
+Then $f = \sum_i a_i e_i'$ as both evaluate to the same on the basis elements:
+$$f(e_j) = a_j; \;\;\;\; \left( \sum a_i e_i' \right)(e_j) = \sum a_i e_i' e_j = a_j$$
+}\qed
+\end{thm}
+
+\begin{exmp}
+Let $V = \R^n$ with basis $\B = \left\{ \smp{1\\0\\\vdots\\0}, \ldots, \smp{0\\\vdots\\0\\1} \right\}$
+
+Then the dual basis is given by:
+$$\B' = \{(1,0,\ldots,0), \ldots, (0,\ldots,1)\} \in V' = M_{1 \times n}(\R)$$
+\end{exmp}
+
+\begin{rem}
+If $V$ is the vector space of finite sequences then $V'$ is the vector space of infinite sequences.
+
+Since any linear functional is uniquely determined by its values on the basis elements $e_i = (0, \ldots, 0, 1, 0, \ldots)$
+
+i.e. $f$ is determined by $\bar{b} = (b_0, b_1, \ldots)$ where $b_i = f(e_i)$
+\end{rem}
+
+\begin{rem}
+In this case $V$ is \textbf{not isomorphic} to $V'$\\
+Though the dual basis elements $\{ e_0', e_1', \ldots \}$ are linearly independent, they do not span: $(1,1,\ldots) \nin \spn{e_i}$
+\end{rem}
+
+\begin{defn} 
+A \textbf{natural} linear map is independent of choice of basis\\ (in contrast to the dual map: $v \mapsto v'$)
+\end{defn}
+
+\newpage
+
+\begin{thm}
+Let $V$ be a finite dimensional vector space, then $V \mapsto (V')' = V''$ defined by $v \mapsto E_v$ where $E_v : V' \to \F$ is defined by $f \mapsto f(v)$, taking a vector $v$ to it's evaluation map $E_v$ is a natural linear isomorphism.
+
+\pr{${}$
+\begin{itemize}
+\item $E_v$ is a linear map:
+\begin{align*}
+E_v (f + \lambda g)	&= (f + \lambda g)(v)\\
+					&= f(v) + \lambda g(v)\\
+					&= E_v(f) + \lambda E_v(g)
+\end{align*}
+
+\item $v \mapsto E_v$ is injective:\\
+Assume $E_v = 0$, then $\forall f \in V'$ we have $E_v(f) = f(v) = 0$. We want to show that this obtains iff $v = 0$\\
+Assume that $v \neq 0$, then we can extend to a basis $\B = \{v, e_2, \ldots, e_n\}$ for $V$. Then for $f = v'$ with respect to $\B$ we get $E_v(f) = E_v(v') = v'(v) = 1 \neq 0$ which is a contradiction. Hence $v = 0$ and thus the map is injective.
+
+\item $v \mapsto E_v$ is surjective:\\
+Observe that $\dim V = \dim V' = \dim V''$. Then by injectivity and the rank-nullity theorem the map must be surjective. 
+\end{itemize}
+}\qed
+\end{thm}
+
+\begin{defn}
+Let $U \leq V$. The we define the \textbf{annihilator} of $U$ to be
+$$U^0 = \{ f \in V' : f|_U \equiv 0 \}$$
+\end{defn}
+
+\begin{prop}
+Let $U \leq V$. Then the annihilator of $U$ is a subspace of $V'$
+
+\pr{
+First note that $f \equiv 0 \in U^0$, so that $U^0 \neq \emptyset$\\
+Now, suppose $f,g \in U^0$ and $\lambda \in \F$, then
+\begin{align*}
+(f + \lambda g)(U) 	&= f(U) + \lambda g(U)\\
+					&= 0 + \lambda 0 \tag{$f,g \in U^0$}\\
+					&= 0
+\end{align*}
+Thus $f + \lambda g \in U^0$ and hence $U^0 \leq V'$
+}\qed
+\end{prop}
+
+\newpage
+
+\begin{thm}
+If $V$ is finite dimensional and $U \leq V$ then $\dim U^0 = \dim V - \dim U$
+
+\pr{
+Let $\B_U = \{ e_1, \ldots, e_m \}$ be a basis for $U$ and extend to a basis $\B_V = \{ e_1, \ldots, e_m, \ldots, e_n \}$ for $V$. If we consider the dual basis $B_V' = \{ e_1', \ldots, e_n' \}$ then the theorem follows from the claim that $\{ e_{m+1}', \ldots, e_n' \}$ is a basis for $U^0$.
+
+\pr{
+$\B_U' = \{ e_{m+1}', \ldots, e_n' \} \subset \B_V'$ hence $\B_U'$ is linearly independent
+
+For $j = m+1, \ldots, n$ and $i = 1, \ldots, m$ we have $e_j'(e_i) = 0$, thus $\spn{\B_U'} \subset U^0$
+
+Now, let $f \in U^0 \leq V'$, then there exist $a_i \in \F$ such that
+$f = \sum_i a_i e_i'$ and, since $\B_U$ is a basis for $U$, we have that for $i = 1, \ldots, m$:
+
+$$f(e_i) = 0 = \sum_{j=1}^n a_j e_j' e_i = a_i$$
+
+Hence we must have $a_i = 0$ for $i = 1, \ldots, m$ and hence $\B_U'$ is also spanning
+} \qed
+}
+\end{thm}
+
+\begin{thm}
+If $U, W \leq V$ then:
+\begin{enumerate}[(1) ]
+\item $U \leq W \Longrightarrow W^0 \leq U^0$
+\item $(U+W)^0 = U^0 \cap W^0$
+\item $(U \cap W)^0 = U^0 + W^0$
+\end{enumerate}
+
+\pr{
+\begin{flalign*}
+(1) \hspace*{80pt} &f \in W^0 \iff \forall w \in W : f(w) = 0 &\\
+			& \phantom{f \in W^0\,\;}\Longrightarrow \forall u \in U \leq W : f(u) = 0\\
+			&\phantom{f \in W^0} \iff f \in U^0
+\end{flalign*}\qed
+
+\begin{flalign*}
+(2) \hspace*{50pt} &f \in (U + W)^0 \iff \forall u \in U : f(u) = 0, \forall w \in W : f(w) = 0 &\\
+ &\phantom{f \in (U + W)^0} \iff f \in U^0, f \in W^0\\
+ &\phantom{f \in (U + W)^0} \iff f \in U^0 \cap W^0
+\end{flalign*}\qed
+
+\begin{flalign*}
+(3) \hspace*{10pt} \underline{U^0 + W^0 \leq (U \cap W)^0}\\
+& f \in U + W \iff \exists g \in U^0, \exists h \in W^0 : f = g + h &\\
+& \phantom{f \in U + W \;\,} \Longrightarrow \forall x \in U \cap W : f(x) = g(x) + h(x) = 0\\
+& \phantom{f \in U + W} \iff f \in (U \cap W)^0\\
+\phantom{(3) \hspace*{10pt}} \underline{(U \cap W)^0 = U^0 + W^0}\\
+ \dim(U^0 + W^0) &= \dim U^0 + \dim W^0 - \dim (U^0 \cap W^0)\\
+ 	&= \dim V - \dim U + \dim V - \dim W - \dim(U + W)^0\\
+ 	&= \dim V - \dim U + \dim V - \dim W - \dim V + \dim (U+W)\\
+ 	&= \dim V - \dim U - \dim W + \dim U + \dim W - \dim(U \cap W)\\
+ 	&= \dim V - \dim (U \cap W)\\
+ 	&= \dim (U \cap W)^0
+\end{flalign*}\qed
+}
+\end{thm}
+
+\begin{thm}
+Suppose $V$ is finite dimensional and $U \leq V$.\\ Then, under the isomorphism $\tau: V \xrightarrow{\sim} V''$ given by $v \mapsto E_v$ we have that $U \cong U^{00}$
+
+\pr{
+\begin{align*}
+E_x \in U^{00}	&\iff \forall f \in U^0 : E_x(f) = f(x) = 0\\
+				&\;\,\Longrightarrow x \in U \to E_x \in U^{00}\\
+				&\;\,\Longrightarrow \tau(U) \subseteq U^{00}
+\end{align*}
+Further we have that
+\begin{align*}
+\dim U^{00}	&= \dim V - \dim U^0\\
+			&= \dim V - (\dim V - \dim U)\\
+			&= \dim U
+\end{align*}
+Thus $U \cong U^{00}$ as required
+}\qed
+\end{thm}
+
+\newpage
+
+\begin{thm}
+Let $U \leq V$ with $V$ finite dimensional. Then there exists an isomorphism such that $$U' \cong V'/U^0$$
+
+\pr{
+Consider $\Phi : V' \to U'$ given by $f \mapsto f|_U$
+
+Then $\Phi$ is linear as for all $f,g \in V'$, $\lambda \in \F$ we have
+$$\Phi(f + \lambda g) = (f + \lambda g)|_U = f|_U + \lambda g|_U = \Phi(f) + \lambda \Phi(g)$$
+
+Furthermore, we have
+\begin{align*}
+f \in \ker \Phi	&\iff f|_U = 0\\
+					&\iff f \in U^0
+\end{align*}
+Hence $\ker \Phi = U^0$ and so we can apply the first isomorphism theorem to get
+$$\tilde{\Phi}: V'/U^0 \xrightarrow{\sim} \im \Phi \subseteq U'$$
+
+Now, since $V$ is finite dimensional, any basis $\B_U = \{ e_1, \ldots e_k \}$ of $U$ can be extended to a basis $\B_V = \{ e_1, \ldots, e_n \}$. Then any $g \in U'$ is the image under $\Phi$ of $\tilde{g} \in V'$, defined by $$\tilde{g}(e_i) = \begin{cases} g(e_i) & i = 1, \ldots, m \\ 0 & i = m+1, \ldots, n \end{cases}$$
+
+Thus $\im \Phi = U'$ and so we are done.
+
+Moreover, $\{ e_{m+1}', \ldots, e_n' \}$ is a basis for $U^0$ and $\{ e_1' + U^0, \ldots, e_m' + U^0 \}$ is a basis for $V'/U^0$ such that $\tilde{\Phi}: U' \to V'/U^0$ defined by $e_i' \mapsto e_i' + U^0$ is an isomorphism as required.
+
+}\qed
+\end{thm}
+
+\begin{rem}
+This result is also true in infinite dimensional case
+\end{rem}
+
+\newpage
+
+\begin{defn} Let $T: V \to W$ be a linear transformation. We define the \textbf{dual map} by:
+\begin{align*}
+T': W' &\to V'\\
+	f \;\; &\mapsto f \circ T
+\end{align*}
+\begin{rem} Since $f \circ T$ is linear $T'$ is well defined \end{rem}
+\end{defn}
+
+\begin{prop}
+$T'$ is linear
+
+\pr{
+Let $f,g \in W'$, $\lambda \in \F$ and $v \in V$
+\belowdisplayskip=0pt
+\begin{align*}
+T'(f + \lambda g)(v)	&= ((f + \lambda g) \circ T)(v)\\
+						&= (f + \lambda g)(Tv)\\
+						&= f(Tv) + \lambda g(Tv)\\
+						&= (f \circ T)(v) + \lambda(g \circ T)(v)\\
+						&= T'(f)(v) + \lambda T'(g)(v)
+\end{align*}\vspace*{-8pt}\qed
+}
+\end{prop}
+
+\begin{prop}
+The map $\hom(V,W) \to \hom(W',V')$ given by $T \mapsto T'$ is linear
+
+\pr{
+Let $S,T \in \hom(V,W), \lambda \in \F, f \in W'$ and $v \in V$, then
+\begin{align*}
+(T + \lambda S)'(f)(v)	&= (f \circ (T + \lambda S))(v)\\
+						&= f((T + \lambda S)(v))\\
+						&= f(T(v)) + f(\lambda S(v))\\
+						&= T'(f)(v) + \lambda S'(f)(v)\\
+						&= (T' + \lambda S')(f)(v)
+\end{align*}\vspace{-8pt}\qed
+}
+\end{prop}
+\belowdisplayskip=12pt plus 3pt minus 9pt
+\begin{thm}
+Suppose $V$ and $W$ are finite dimensional, then $T \mapsto T'$ defines a natural isomorphism between $\hom(V,W)$ and $\hom(W',V')$
+
+\pr{
+Assume $T' = 0$
+
+But now, $T'(f)(v) = 0$ for all $f \in W', v \in V$ if and only if $f(T(v)) = 0$ for all $f$ and $v$.\\ Suppose $T(v) \neq 0$, then we can extend $T(v)$ to a basis $\B_W$ of $W$.\\ Then the corresponding element of the dual basis $\B_W'$ satisfies $(T(v))'(T(v)) = 1$ contradicting that $f(T(v)) = 0$ for all $f$. Thus $T(v) = 0$ for all $v \in V$, or $T \equiv 0$, and hence $T \mapsto T'$ is injective.
+
+As
+\begin{align*}
+\dim \hom(V,W)	&= \dim V \cdot \dim W\\
+				&= \dim W' \cdot \dim V'\\
+				&= \dim \hom(W',V')
+\end{align*}
+We have that $T \mapsto T'$ is also surjective and hence is the isomorphism required.\qed
+}
+
+\end{thm}
+
+\begin{thm}
+Let $V, W$ be finite dimensional vector spaces\\
+Let $\B_V, \B_W$ be bases of $V$ and $W$ respectively\\
+Let $\B_V', B_W'$ be the corresponding dual bases of $V'$ and $W'$\\
+Then, for any linear map $T: V \to W$
+$$\Big( {_{\B_w}[}T]_{\B_V} \Big)^t = {_{\B_V'}[}T']_{\B_W'}$$
+where $A^t$ denotes the transpose of $A$.
+
+\pr{
+Let $\B_V = \{ e_1, \ldots, e_n \}$ and $\B_W = \{ x_1, \ldots, x_m \}$
+
+Put $_{\B_W}[T]_{\B_V} = A = (a_{ij})_{m \times n}$
+
+Then $\displaystyle T(e_j) = \sum_{i=1}^m a_{ij} x_i$ and $x_i'(T(e_j)) = a_{ij}$
+
+Put $_{\B_v'}[T']_{\B_W'} = B = (b_{ij})_{n \times m}$
+
+Then $\displaystyle T'(x_i') = \sum_{j=1}^n b_{ji} e_j$ and $T'(x_i')(e_j) = b_{ji}$
+
+Hence $b_{ji} = T'(x_i')(e_j) = x_i'(T(e_j)) = a_{ij}$ thus $B = A^t$
+}\qed
+\end{thm}
+
+\begin{rem} The above theorem is the isomorphism from $M_{n \times m}(\F) \to M_{m \times n}$ given by $A \mapsto A^t$ \end{rem}
+
+\chapter{Bilinear Forms and Inner Products}
+
+\begin{defn}
+Let $V$ be a vector space over $\F$
+
+A \textbf{bilinear form} on $V$ is a map $\mathcal{F} : V \times V \to \F$ such that for all $u, v,w \in V, \lambda \in \F$
+\begin{adjustwidth}{1cm}{}
+\begin{enumerate}[(1) ]
+\item $\Fc(u + v, w) = \Fc(u,w) + \Fc(v,w)$
+\item $\Fc(u, v + w) = \Fc(u,v) + \Fc(u,w)$
+\item $\Fc(\lambda v, w) = \lambda \Fc(v,w) = \Fc(v, \lambda w)$
+\end{enumerate}
+\end{adjustwidth}
+$\Fc$ is called \textbf{symmetrical} if $F(v,w) = F(w,v)$ for all $v,w \in V$
+
+$\Fc$ is called \textbf{non-degenerate} if $(\forall w \in V : F(v,w) = 0) \Rightarrow v = 0$
+
+$\Fc$ is called \textbf{positive definite} if for all $v \in V: v \neq 0 \Rightarrow F(v,v) > 0$
+\end{defn}
+
+\begin{rem} {\sc Positive Definite $\Rightarrow$ Non-Degenerate}: $\Fc(v,v) = 0 \Rightarrow v = 0$\\ \end{rem}
+
+\begin{exmp} Minkowski Space: $V = \R^3 \times \R$
+
+$\Fc \left[ ((x,y,z),t),((x',y',z'),t') \right] = xx' + yy' + zz' - c^2tt'$
+
+$\Fc$ is bilinear, symmetric, non-degenerate, NOT positive definite\\
+\end{exmp}
+
+\begin{exmp}
+$V = \R^3$
+
+$\Fc((x,y,z),(x',y',z')) = xx' + yy' + zz'$
+
+$\Fc$ is bilinear, symmetric and positive definite\\
+\end{exmp}
+
+\begin{exmp}
+$V = \mathcal{C}([0,1])$
+
+$\Fc(f,g) = \int_0^1 f(x) g(x) dx$
+
+$\Fc$ is bilinear, symmetric and positive definite
+\end{exmp}
+
+\newpage
+
+\begin{defn}
+Let $V$ be a vector space over $\C$
+
+A \textbf{sesquilinear form} on $V$ is a map $\Fc : V \times V \to \C$ such that for all $u,v,w \in V$, $\lambda \in \C$
+
+\begin{adjustwidth}{1cm}{}
+\begin{enumerate}[(1) ]
+\item $\Fc(u + v, w) = \Fc(u,w) + \Fc(v,w)$
+\item $\Fc(u, v + w) = \Fc(u,v) + \Fc(u,w)$
+\item $\Fc(\bar{\lambda} v, w) = \lambda \Fc(v,w) = \Fc(v, \lambda w)$
+\end{enumerate}
+\end{adjustwidth}
+$\Fc$ is \textbf{conjugate symmetric} if $\Fc(v,w) = \bar{\Fc(w,v)}$ for all $v,w \in V$
+
+$\Fc$ is \textbf{non-degenerate} if $(\forall w \in V: \Fc(v,w) = 0) \Rightarrow v = 0$
+ 
+$\Fc$ is \textbf{positive definite} if $\Fc(v,v) \in \R, \Fc(v,v) > 0$ for all $v \in V$\\
+\end{defn}
+
+\begin{exmp}
+$V = \C^n$
+
+$\Fc(v,w) = \bar{v}^tAw$ for some $A \in M_{n \times n}(\C)$
+\begin{itemize}
+\item $\Fc$ is sesquilinear, conjugate symmetric iff $A = \bar{A}^t$
+
+Observe that $\Fc(e_i,e_j) = \bar{e_i}^t A e_j = a_{ij}$ and $\overline{\Fc(e_j,e_i)} = \overline{\bar{e_j}^t A e_i} = \overline{a_{ji}}$.\\ Thus $\Fc$ is conjugate symmetric iff $a_{ij} = \overline{a_{ji}}$ for all $i,j$, that is $A = \bar{A}^t$
+
+\item $\Fc$ is non-degenerate $\iff$ $A$ is non-singular
+\begin{align*}
+A \text{ singular }	&\iff \exists w \neq 0 \in V : Aw = 0\\
+					&\iff \exists w \neq 0 \in V : \forall v \in V \bar{v}^tAw = 0\\
+					&\iff \Fc \text{ degenerate }
+\end{align*}
+\end{itemize}
+\end{exmp}
+
+\begin{defn}
+A real (complex) vector space $V$ with a positive definite, symmetric (conjugate symmetric), bilinear (sesquilinear) form $\Fc = \spn{\;,\,}$ is called an \textbf{inner product space}
+\end{defn}
+
+\begin{defn} 
+$\{ w_1, \ldots, w_n \}$ are mutually \textbf{orthogonal} if $\spn{w_i,w_j} = 0$ for all $i \neq j$
+\end{defn}
+
+\begin{defn}
+$\{ w_1, \ldots, w_n \}$ are mutually \textbf{orthonormal} if $\spn{w_i, w_j} = \delta_{ij}$ for all $i,j$
+\end{defn}
+
+\begin{prop}
+Suppose $V$ is an inner product space over $\R$ or $\C$ and $\{ w_1, \ldots, w_n \}$ are orthogonal with $w_i \neq 0$ for all $i$. Then $\{ w_1, \ldots, w_n \}$ is linearly independent.
+
+\pr{
+Assume $\sum_i \lambda_i w_i = 0$ for some $\lambda_i \in \F$
+\begin{flalign*}
+&\Rightarrow \spn{w_j, \sum_i \lambda_i w_i} = 0 \hspace{24pt} \forall j&\\
+&\Rightarrow \sum_i \lambda_i \spn{w_j,w_i} = 0 \hspace{30pt} \forall j\\
+&\Rightarrow \lambda_j \spn{w_j, w_j} = 0 \hspace{45pt} \forall j\\
+&\Rightarrow \lambda_j = 0 \hspace{83.5pt} \forall j
+\end{flalign*}
+}
+\end{prop}
+
+\newpage
+
+\begin{thm} \textnormal{\textbf{Gram-Schmidt Process}}\\
+Let $\{ v_1, \ldots, v_n \}$ be a basis of the inner product space $V$
+\begin{flalign*}
+\text{Put } w_1 &= v_1&\\
+	w_2 &= v_2 - \frac{\spn{w_1, v_2}}{\spn{w_1, w_1}}\\
+		&\vdots\\
+	w_k &= v_k - \sum_{i=1}^{k-1} \frac{\spn{w_i, v_k}}{\spn{w_i, w_i}} w_i \hspace{50pt} (*)
+\end{flalign*}
+
+Clearly $\spn{w_i} = \spn{v_i}$\\
+Assuming $\spn{w_1, \ldots, w_{k-1}} = \spn{v_1, \ldots, v_{k-1}}$ we have by $(*)$
+$$\spn{w_1, \ldots, w_k} = \spn{w_1, \ldots, w_{k-1}, v_k}$$
+Then by the inductive hypothesis we have
+$$\spn{w_1, \ldots, w_k} = \spn{w_1, \ldots, w_{k-1}, v_k} = \spn{v_1, \ldots, v_k}$$
+
+Now, if we assume that $\{ w_1, \ldots, w_{k-1} \}$ is orthogonal then for $j < k$ we have from $(*)$ that
+\begin{align*}
+\spn{w_k, w_j} &= \spn{v_k, w_j} - \sum_{i=1}^{k-1} \frac{\spn{w_i,v_k}}{\spn{w_i,w_i}} \spn{w_i, w_j}\\
+	&= \spn{v_k,w_j} - \frac{\spn{w_j,v_k}}{\spn{w_j,w_j}} \spn{w_j,w_j}\\
+	&= 0
+\end{align*}
+Hence by induction we have that $\{ w_1, \ldots, w_n \}$ is an orthogonal basis for $V$
+
+Now we put $u_i = \dfrac{w_i}{||w_i||}$ where $||w_i|| = \sqrt{\spn{w_i,w_i}} \in \R$ for each $i$
+
+Then $\{ u_1, \ldots, u_n \}$ is an \textbf{orthonormal basis} of $V$\\
+
+\end{thm}
+
+\begin{rem} 
+The change of basis matrix from $\{ v_i \}$ to $\{ u_i \}$ is upper-triangular with positive entries on the diagonal.
+\end{rem}
+
+\begin{thm}\textnormal{\textbf{Bessel's Inequality}}\\
+Let $\dim V < \infty$ and $\{ u_1, \ldots, u_n \}$ be an orthonormal basis
+
+Then $\forall v \in V$:
+$$||v||^2 \geq \sum_{i=1}^k \big| \spn{v,u_i} \big|^2$$
+With equality holding iff $k = \dim V$
+
+\end{thm}
+
+\newpage
+\section{Duals of Inner Product Spaces}
+
+Let $V$ be an inner product space over $\F$ ($\R$ or $\C$)
+
+Then for all $v \in V$
+\begin{align*}
+\spn{v,\underline{\;\;}\,} : V &\to \R\\
+						w &\mapsto \spn{v,w}
+\end{align*}
+Is a linear functional on $V$ as $\spb$ is linear in the second co-ordinate
+
+\begin{thm}
+For $\F = \R$, the map $v \mapsto \spn{v, \underline{\;\;}\,}$ is a \textbf{natural} injective linear map $\Phi: V \to V'$ which is an isomorphism when $\dim V < \infty$
+
+\pr{
+$\Phi$ is linear as for all $v,w \in V, \lambda \in \R$
+$$\spn{v + \lambda w, \blnk} = \spn{v, \blnk} + \lambda \spn{w, \blnk}$$
+Since $\spb$ is non-degenerate we have that $\spn{v, \blnk} = \spn{ \alnk, v}$ is the zero function iff $v = 0$\\ Hence $\Phi$ is injective.
+
+If $\dim V < \infty$ then we have $\dim V = \dim V'$, therefore $\im \Phi = V'$ and so $\Phi$ is an isomorphism in the finite dimensional case
+}\qed
+\end{thm}
+
+\begin{rem} 
+For $\F = \C$, $\Phi$ defines a conjugate linear map: $\Phi(\lambda v) = \overline{\lambda}\Phi(v)$
+\end{rem}
+
+\begin{defn}
+Let $U \leq V$ be a finite dimensional subspace of $V$
+
+The \textbf{orthogonal complement} of $U$ is defined as
+$$U^\perp := \{ v \in V : \spn{u,v} = 0 \text{ for all } u \in U \}$$
+
+\end{defn}
+
+\begin{prop}
+$U^\perp$ is a linear subspace
+
+\pr{
+For all $v, w \in U^\perp, \lambda \in \F$ and for all $u \in U$:
+$$\spn{u, v + \lambda w} = \spn{u, v} + \lambda{u,w} = 0$$
+Thus $v + \lambda w \in U^\perp$
+}\qed
+\end{prop}
+
+\newpage
+
+\begin{prop}Let $U,W$ be finite dimensional subspaces of an inner product space $V$
+\begin{adjustwidth}{1cm}{}
+\begin{enumerate}[(1) ]
+\item $U \cap U^\perp = \{ 0 \}$
+\pr{
+If $u \in U \cap U^\perp$ then $\spn{u,u} = 0$. By positive definiteness of $\spb$ we have $u = 0$
+}\qed
+
+\item $\dim V < \infty \Rightarrow U \opl U^\perp = V$
+\pr{
+Take $\{e_1, \ldots, e_k \}$ an orthonormal basis of $U$ and let $\{e_1, \ldots, e_k, \ldots, e_n \}$ be an orthonormal basis for $V$.
+
+Now, assume $v = \sum_i a_i e_i \in U^\perp$. Then,
+$$\spn{e_j, v} = \spn{e_j, \textstyle \sum_i a_i e_i} = \spn{e_j, a_j e_j} = a_j$$
+By definition of $U^\perp$ we have $\spn{e_j, v} = a_j = 0$ for $j = 1, \ldots, k$, thus $v \in \spn{e_{k+1}, \ldots, e_n}$
+
+Vice versa, if $v \in \spn{e_{k+1}, \ldots, e_n}$ then for all $u \in U$ clearly $\spn{u,v} = 0$ that is $v \in U^\perp$
+
+Thus $U^\perp = \spn{e_{k+1}, \ldots, e_n}$ and hence $V = U \opl U^\perp$
+}\qed
+
+\item $(U + W)^\perp = U^\perp \cap W^\perp$
+
+\pr{
+Take $v \in (U+W)^\perp$. Since $U$ and $W$ are subspaces of $V$ they both contain $0$. Then for all $u \in U$ and all $w \in W$ we have $u+0 = u, 0+w = w \in U + W$ and hence $\spn{v,u} = 0 = \spn{v,w}$ and so $v \in U^\perp \cap W^\perp$ as required.\\
+    
+Conversely, take $v \in U^\perp \cap W^\perp$. Then for all $\omega \in U + W$ we have $\omega = u + w$ for some $u \in U, w \in W$ and hence $\spn{v,\omega} = \spn{v,u+w} = \spn{v,u} + \spn{v,w} = 0 + 0 = 0$ and so $v \in (U+W)^\perp$.
+}\qed
+
+\item $(U \cap W)^\perp \geq U^\perp + W^\perp$ with $= \iff \dim V < \infty$
+
+\pr{
+Take $v \in U^\perp + W^\perp$, then there exist $u \in U^\perp, w \in W^\perp$ such that $v = u + w$. Now, for $\omega \in U \cap W$ we have $\omega \in U$ and $\omega \in W$, therefore
+$$\spn{v, \omega} = \spn{u + w, \omega} = \spn{u,\omega} + \spn{w,\omega} = 0 + 0 = 0$$
+Hence $v \in (U \cap W)^\perp$ as required.
+
+Further, if $\dim V < \infty$ then we can apply the dimension formula to obtain
+\begin{align*}
+\dim (U \cap W)^\perp	&= \dim V - \dim (U \cap W)\\
+						&= \dim V - \dim U + \dim V - \dim W\\
+						&= \dim U^\perp + \dim W^\perp\\
+						&= \dim (U^\perp + W^\perp)
+\end{align*}
+Hence, by dimensionality, we have $(U \cap W)^\perp = U^\perp + W^\perp$ when $\dim V < \infty$\\
+\qed}
+
+\item $U \leq (U^\perp)^\perp$ with $= \iff \dim V < \infty$
+
+\pr{
+Let $u \in U$
+
+Then for all $w \in U^\perp : \spn{u,w} = \overline{\spn{w,u}} = 0$ and hence $\spn{w,u} = 0$ and thus $u \in (U^\perp)^\perp$
+
+If $\dim V < \infty$ then
+$$\dim(U^\perp)^\perp = \dim V - \dim U^\perp = \dim V - \dim V + \dim U = \dim U$$
+Thus, by dimensionality, equality holds when $\dim V < \infty$
+}\qed
+\end{enumerate}
+\end{adjustwidth}
+\end{prop}
+
+\begin{exmp}Let $U,W \leq \R^3$ be defined
+$$U := \left\{ \smp{x\\0\\0} \right\}_{x \in \R} \hspace*{20pt} W := \left\{ \smp{0\\y\\0} \right\}_{y \in \R}$$
+
+$U^\perp = yz$-plane $= \sett{\smp{0\\y\\z}}_{y,z \in \R}$
+
+$W^\perp = xz$-plane $= \sett{\smp{x\\0\\z}}_{x,z \in \R}$
+
+$U^\perp \cap W^\perp = z$-axis $= \sett{\smp{0\\0\\z}}_{z \in \R}$
+
+$(U+W)^\perp = (xy$-plane$)^\perp = z$-axis $= \sett{\smp{0\\0\\z}}_{z \in \R}$
+
+$(U \cap W)^\perp = \{0\}^\perp = \R^3$
+
+$U^\perp + W^\perp = \{ yz$-plane + $xz$-plane$\} = \R^3$\\
+\end{exmp}
+
+\begin{prop} Let $\dim V < \infty$ and $\F = \R$\\
+Then, under the isomorphism $\Phi: V \to V'$ given by $v \mapsto \spn{v, \blnk}$
+$$U^\perp \cong U^0$$
+
+\pr{
+Let $v \in U^\perp$, then for all $u \in U$ we have
+$$\spn{v,u} = 0 = \spn{u,v}$$
+Thus $\Phi(v) = \spn{v, \blnk} \in U^0$
+
+Moreover, $\dim U^\perp = \dim V - \dim U = \dim U^0$, giving $U^\perp \cong U^0$ as required.
+}\qed
+
+\end{prop}
+
+\newpage
+
+\begin{exmp}
+Let $V$ be the vector space of real polynomials with degree $\leq 2$, so $V = \spn{1, t, t^2}$
+
+Define $\spn{f,g} = f(1)g(1) + f(2)g(2) + f(3)g(3)$
+
+Then $\spb$ is bilinear, symmetric and positive definite:
+\begin{align*}
+\spn{f,f} =  f(1)^2 + f(2)^2 + f(3)^2 = 0 &\iff f(1) = f(2) = f(3) = 0\\
+	&\iff f \text{ has 3 roots \textbf{or} } f \equiv 0
+\end{align*}
+Since $f$ has degree $\leq 2$ it cannot have 3 roots, thus $f \equiv 0$
+
+Let $U = \spn{1,t}$ and take $f \in U, g \in U^\perp$ such that $f + g = t^2$, then for orthonormal basis $\{u_1, u_2\}$ of $U$
+$$g = t^2 - \Big( \spn{t^2,u_1}u_1 + \spn{t^2, u_2}u_2 \Big)$$
+Put
+\begin{flalign*}
+\text{Let } u_1	&= \frac{1}{\sqrt{\spn{1,1}}} = \frac{1}{\sqrt{3}}& \\
+			u_2 &= \frac{t - \spn{t, u_1}u_1}{|| \uparrow ||}
+				 = \frac{t - \frac{1}{\sqrt{3}} \left( \frac{1}{\sqrt{3}} + \frac{2}{\sqrt{3}} + \frac{3}{\sqrt{3}} \right)}{|| \uparrow ||} = \frac{t - 2}{||t - 2||} = \frac{t-2}{\sqrt{2}}
+\intertext{Then,}
+			f	&= \spn{t^2, \frac{1}{\sqrt{3}}} \frac{1}{\sqrt{3}} + \spn{t^2, \frac{t-2}{\sqrt{2}}} \frac{t-2}{\sqrt{2}} = \frac{14}{3} + 4(t-2) = 4t - \frac{10}{3}
+\end{flalign*}
+\end{exmp}
+
+\section{Adjoint Maps}
+Let $V$ be an inner product space over $\F = \R$ or $\C$
+
+\begin{defn}
+A linear map $T: V \to V$ has an \textbf{adjoint map} $T^*: V \to V$ if for all $v,w \in V$
+$$\spn{v, Tw} = \spn{T^*v, w}$$
+\end{defn}
+
+\begin{lem}
+If $T^*$ exists, then it is unique
+\pr{
+Suppose $T'$ is another adjoint map, then for all $v,w \in V$
+\begin{align*}
+\spn{T^*v - T'v, w}	&= \spn{T^*v, w} - \spn{T'v, w}\\
+					&= \spn{v, Tw} - \spn{v, Tw}\\
+					&= 0
+\end{align*}
+Thus $T^*v - T'v = 0$ for all $v \in V$, that is $T^* \equiv T'$
+}\qed
+\end{lem}
+
+\newpage
+
+\begin{thm}
+Let $T: V \to V$ be linear and $\dim V < \infty$, then $T^*$ exists and is also linear
+
+\pr{
+Fix $v \in V$ and consider the map $\phi: V \to \F$ by $\phi(w) = \spn{v, Tw}$
+
+$\phi$ is a linear functional as $T$ is linear and $\spb$ is linear in its second coordinate
+
+As $\dim V < \infty$, $\Phi: V \to V'$ given by $v \mapsto \spn{v, \blnk}$ is a linear isomorphism when $\F = \R$ and is a conjugate linear bijection when $\F = \C$
+
+Then, $\exists u \in V$ such that $\phi = \spn{u, \blnk}$ - we define $\spn{T^*v, \blnk} = \spn{u, \blnk}$
+
+For all $v_1, v_2, w \in V, \lambda \in \F$:
+\begin{align*}
+\spn{T^*(v_1 + \lambda v_2), w}	&= \spn{v_1 + \lambda v_2, Tw}\\
+	&= \spn{v_1, Tw} + \bar{\lambda} \spn{v_2, Tw}\\
+	&= \spn{T^*v_1, w} + \bar{\lambda} \spn{T^*v_2, w}\\
+	&= \spn{T^*v_1 + \lambda T^*v_2, w}
+\end{align*}\qed
+}
+\end{thm}
+
+\begin{prop}
+Let $T: V \to V$ be linear and $\B = \{ e_1, \ldots, e_n \}$ be an orthonormal basis for $V$:
+$$_\B[T^*]_\B = {_\B\overline{[T]}_\B}^t$$
+
+\pr{
+Let $A = {_\B[T]_\B}$ and $B = {_\B[T]_\B}$\\ Then,
+\begin{align*}
+b_{ij}	&= \spn{e_i, T^*e_j}\\
+		&= \overline{\spn{T*e_j, e_i}}\\
+		&= \overline{\spn{e_j, Te_i}}\\
+		&= \overline{a_{ji}}
+\end{align*}
+And hence $B = \overline{A}^t$ as required
+}\qed
+
+\end{prop}
+
+\begin{rem}${}$
+\begin{enumerate}[(1) ]
+\item The theorem is false if $V$ is not finite dimensional
+\item The proposition is false if $\B$ is not orthonormal
+\item For $\F = \R$, under the linear isomorphism $\phi: V \to V'$ by $\phi(v) = \spn{v, \blnk}$, $T^*$ is identified with $T'$:
+
+An orthonormal basis $\B$ is taken to its dual basis and hence
+$${_\B[T']_\B} = \left( {_\B[T]_\B} \right)^t = {_\B[T^*]_\B}$$
+\end{enumerate}
+\end{rem}
+
+\newpage
+
+\begin{prop}
+Let $S,T : V \to V$ be linear, $\lambda \in \F$ and $\dim V < \infty$, then:
+\begin{adjustwidth}{1cm}{}
+\begin{enumerate}[(1) ]
+\item $(S + T)^* = S^* + T^*$
+\item $(\lambda T)^* = \bar{\lambda}T^*$
+\item $(ST)^* = T^*S^*$
+\item $(T^*)^* = T$
+\item If $m_T$ is the minimal polynomial of $T$ then $m_{T^*} = \overline{m_T}$
+\end{enumerate}
+\end{adjustwidth}
+\pr{Follow straightforwardly from Proposition 8.10 and standard properties of matrices
+}
+\end{prop}
+
+\begin{defn} 
+A linear map $T: V \to V$ is \textbf{self-adjoint} if $T^* = T$
+\end{defn}
+
+\begin{lem}
+If $\lambda$ is an eigenvalue of a self-adjoint linear transformation, then $\lambda \in \R$
+
+\pr{
+Assume $w \neq 0, Tw = \lambda w$, then
+\begin{align*}
+\lambda \spn{w,w}	&= \spn{w, \lambda w} \tag{linearity in second coordinate}\\
+					&= \spn{w, Tw} \tag{$Tw = \lambda w$}\\
+					&= \spn{T^*w, w} \tag{definition of adjoint}\\
+					&= \spn{Tw, w} \tag{$T$ self-adjoint}\\
+					&= \spn{\lambda w, w} \tag{$Tw = \lambda w$}\\
+					&= \bar{\lambda} \spn{w,w} \tag{conjugate linearity in first coordinate}
+\end{align*}
+Since $\spn{w,w} \neq 0$ we must have $\lambda = \bar{\lambda}$ and hence $\lambda \in \R$
+}\qed
+\end{lem}
+
+\begin{lem}
+If $T: V \to V$ is self-adjoint and $U \leq V$ is $T$-invariant, then $U^\perp$ is also $T$-invariant
+\pr{Let $w \in U^\perp, u \in U$, then
+\begin{align*}
+\spn{u, Tw}	&= \spn{T^*u, w} \tag{definition of adjoint}\\
+			&= \spn{Tu, w} \tag{$T$ self-adjoint}\\
+			&= 0 \tag{$Tu \in U, w \in U^\perp$}
+\end{align*}
+Hence $Tw \in U^\perp$, and thus $U^\perp$ is $T$-invariant
+}\qed
+\end{lem}
+
+\newpage
+
+\begin{thm}
+Suppose $T: V \to V$ is self-adjoint and $\dim V < \infty$, then there exists an orthonormal basis of eigenvectors
+\pr{
+By Lemma 8.12 there exists $\lambda \in \R$ and $w \neq 0 \in V$ with $Tw = \lambda w$.
+
+Clearly $\spn{w}$ is $T$-invariant, and hence, by Lemma 8.13., $\spn{w}^\perp$ is also $T$-invariant
+
+Let $e_1 = \frac{w}{||w||}$, then $\sett{e_1}$ is an orthonormal basis for $\spn{w}$.\\ This is the base case for an induction on the dimension of the subspace.
+
+By inductive hypothesis, there is an orthonormal basis of eigenvectors, $\sett{e_2, \ldots, e_n}$, for $T|_{\spn{w}^\perp}$
+
+Now, since $V = U \opl U^\perp$, $\sett{e_1, \ldots, e_n}$ is an orthonormal basis for $V$ of eigenvectors of $T$.
+}\qed
+\end{thm}
+
+\begin{cor}
+Any $n \times n$ matric $A$ satisfying $A = \overline{A}^t$ is diagonalizable by an orthonormal change of basis
+\pr{
+By theorem, there exists $P = \pmx{| & & |\\e_1 & \cdots & e_n\\| & & |}$ with $\sett{e_1, \ldots, e_n}$ an orthonormal basis for $\F^n$ such that\\
+$$P^{-1}AP = \pmx{\lambda_1\\ & \ddots\\ && \lambda_n}$$
+}
+\end{cor}
+
+\section{Orthogonal and Unitary Transformations}
+
+\begin{defn} 
+$A$ is called \textbf{orthogonal} when $A^{-1} = \bar{A}^t$ and $\F = \R$
+\end{defn}
+
+\begin{defn}
+$A$ is called \textbf{unitary} when $A^{-1} = \bar{A}^t$ and $\F = \C$
+\end{defn}
+
+\begin{exmp}
+Let $\sett{e_1, \ldots, e_n}$ be an orthonormal basis for $\F^n$ ($\F = \R$ or $\C$) under the normal dot product
+
+Put $A = \pmx{| & & |\\e_1 & \cdots & e_n\\| & & |}$, then $\bar{A}^tA = I$ as $\bar{A}^t = \pmx{\text{\textbf{---}} & \bar{e_1} & \text{\textbf{---}}\\ & \vdots \\ \text{\textbf{---}} & \bar{e_2} & \text{\textbf{---}}}$
+
+Hence $A^{-1} = \bar{A}^t$
+\end{exmp}
+
+\begin{defn}
+Let $V$ be a finite dimensional vector space with inner product and $T: V \to V$ be a linear transformation satisfying $T^*T = I = TT^*$
+
+Then $T$ is \textbf{orthogonal} if $\F = \R$ or \textbf{unitary} if $\F = \C$
+\end{defn}
+
+\newpage
+
+\begin{thm}
+The following are equivalent:
+\begin{adjustwidth}{1cm}{}
+\begin{enumerate}[(1) ]
+\item $T^* = T^{-1}$
+\item $T$ preserves innerproducts: $\spn{v,w} = \spn{Tv,Tw} \hspace*{10pt} \forall v,w \in V$
+\item $T$ preserves lengths: $||v|| = ||Tv|| \hspace{10pt} \forall v \in V$
+\end{enumerate}
+\end{adjustwidth}
+\pr{${}$
+\begin{adjustwidth}{1.5cm}{}
+\begin{enumerate}
+\item[$(1) \Rightarrow (2)$ ] $\spn{v,w} = \spn{v, T^*Tw} = \spn{Tv, Tw}$\\
+\item[$(2) \Rightarrow (3)$ ] $||v||^2 = \spn{v,v} = \spn{Tv,Tv} = ||Tv||^2$\\
+\item[$(2) \Rightarrow (1)$ ] $\spn{T^*Tv - v,w} = \spn{T^*Tv, w} - \spn{v,w} = \spn{Tv,Tw} - \spn{v,w} = 0$\\ By non-degeneracy of $\spb$: $T^*T = I$\\
+\item[$(3) \Rightarrow (2)$ ] See Proposition 8.17.
+\end{enumerate}
+\end{adjustwidth}
+}\qed
+\end{thm}
+
+\begin{rem}
+Orthogonal/Unitary linear transformations are isometries:
+$$d(v,w) = ||v-w|| = ||T(v-w)|| = ||Tv - Tw|| = d(Tv,Tw)$$
+\end{rem}
+
+\begin{rem}
+Let $\B$ be an orthonormal basis for $V$ and $T$ be an orthogonal/unitary linear transformation. Then $_\B[T]_\B$ is an orthogonal/unitary matrix - the columns (and rows) form orthonormal bases.
+\end{rem}
+
+\begin{prop}
+The length function uniquely determines the inner product:
+$$\spn{v,v}_1 = \spn{v,v}_2 \hspace{5pt} \forall v \in V \iff \spn{v,w}_1 = \spn{v,w}_2 \hspace{5pt} \forall v,w \in V$$
+\pr{$(\Longleftarrow)$ is clear, remains to show $(\Longrightarrow)$, we have
+\begin{align*}
+\spn{v+w, v+w} &= \spn{v,v} + \spn{v,w} + \overline{\spn{v,w}} + \spn{w,w}
+\intertext{Hence, when $\F = \R$}
+\spn{v,w} &= \frac{1}{2} \Big( ||v+w||^2 - ||v||^2 - ||w||^2 \Big)
+\intertext{Alternatively, when $\F = \C$ we also consider}
+\spn{v+iw, v+iw} &= \spn{v,v} + i\spn{v,w} - i\overline{\spn{v,w}} + \spn{w,w}
+\intertext{To obtain:}
+\Re\spn{v,w} &= \frac{1}{2} \Big( ||v+w||^2 - ||v||^2 - ||w||^2 \Big) \\
+\Im\spn{v,w} &= \frac{1}{2} \Big( ||v+iw||^2- ||v||^2 - ||w||^2 \Big)
+\end{align*}
+
+}\qed
+
+\end{prop}
+
+\begin{defn}The following are groups:
+\begin{align*}
+O_n 	&= \sett{A \in M_{n \times n}(\R) : A^{-1} = A^t}
+\tag{Orthogonal}\\
+SO_n	&= \sett{A \in M_{n \times n}(\R) : A^{-1} = A^t, \det A = 1} \tag{Special Orthogonal} \\
+U_n		&= \sett{A \in M_{n \times n}(\C) : A^{-1} = \bar{A}^t}
+\tag{Unitary}\\
+SU_n	&= \sett{A \in M_{n \times n}(\C) : A^{-1} = \bar{A}^t, \det A = 1} \tag{Special Unitary}
+\end{align*}
+\end{defn}
+
+\begin{lem}
+Let $T: V \to V$ be an orthogonal/unitary linear map on a finite dimensional inner product space $V$. If $\lambda$ is an eigenvalue of $T$, then $|\lambda| = 1$.
+\pr{Take $v \neq 0$, an eigenvector for $\lambda$, then
+$$||v|| = ||Tv|| = ||\lambda v|| = |\lambda| \cdot ||v|| \Rightarrow |\lambda| = 1$$
+}\qed
+\end{lem}
+
+\begin{cor}
+If $A$ is an orthogonal/unitary matrix then:
+\begin{itemize}
+\item[] $\det A = \pm 1$ for $\F = \R$
+\item[] $\det A \in S^1$ for $\F = \C$
+\end{itemize}
+\pr{
+Working over $\C$, $A$ can be upper-triangulized with eigenvalues on the diagonal (with repetitions), that is there exists $P$ such that
+$$P^{-1}AP = \pmx{\lambda_1 & * & *\\ & \ddots & * \\ 0 & & \lambda_n}$$
+Then, $\det A = \det P^{-1}AP = \lambda_1 \cdots \lambda_n$
+
+Now, by Lemma 8.18, $|\lambda_i| = 1$ for all $i$, hence $|\det A| = 1$
+
+So $\det A = \pm 1$ for $\F = \R$ or $\det A \in S^1$ for $\F = \C$
+}\qed
+\end{cor}
+
+\begin{rem}${}$
+\begin{align*}
+\det : O_n &\to \sett{\pm 1} \cong \Z_2 &(\ker \det = SO_n)\\
+\det : U_n &\to S^1 &(\ker \det = SU_n)
+\end{align*}
+\end{rem}
+
+\newpage
+
+\begin{lem}
+Let $T: V \to V$ be a linear map on a finite dimensional inner product space $V$ and assume $T^* = T^{-1}$. Then if $U \leq V$ is $T$-invariant, then $U^\perp$ is also.
+\pr{
+Let $u \in U, w \in U^\perp$ and let $Tu = u' \in U$. Then,
+\begin{align*}
+0 = \spn{u,w} = \spn{Tu,Tw} = \spn{u', Tw}
+\end{align*}
+Now, as $T$ is invertible it must be a bijection and thus $T(U) \subseteq U \Longrightarrow T(U) = U$.
+
+Hence, $Tw \in U^\perp$ as required.
+}\qed
+\end{lem}
+
+\begin{thm}
+Let $T: V \to V$ be a unitary linear transformation on a finite dimensional inner product space. Then there exists an orthonormal basis of eigenvectors.
+\pr{
+There exists $v \neq 0$ such that $Tv = \lambda v$ for some eigenvalue $\lambda$
+
+Then $\spn{v}$ is $T$-invariant and hence, by Lemma 8.20, so is $\spn{v}^\perp$
+
+$\dim \spn{v}^\perp < \dim V$ thus by induction $\spn{v}^\perp$ has an orthonormal basis of eigenvectors, $\sett{e_2, \ldots, e_n}$
+
+Setting $e_1 = \dfrac{v}{||v||}$ we obtain $\sett{e_1, \ldots, e_n}$, an orthonormal basis of eigenvectors.
+}\qed
+\end{thm}
+
+\begin{cor}
+If $A \in U_n$ then there exists $P \in U_n$ such that $P^{-1}AP$ is diagonal
+\end{cor}
+
+\begin{rem}
+If $A \in O_n$, then $A \in U_n$ \textbf{but} $A$ may not be diagonalizable over $\R$
+\end{rem}
+
+\begin{exmp}
+Let $A \in O_2$ and $A = \smp{a & b \\ c & d}$.\\ Then $A^t = A^{-1}$ and hence:
+$$a^2 + c^2 = 1 = b^2 + c^2 \hspace{2cm} ab + cd = 0 \hspace{2cm} ad - bc = \pm 1$$
+Solving these gives:
+$$A = R_\theta = \mx{\text{\sc rotation} \\ \pmx{\cos \theta & -\sin \theta \\ \sin \theta & \cos \theta} \\ \det = 1} \text{ or } A = S_\theta = \mx{\text{\sc reflection} \\ \pmx{\sin \theta & \cos \theta \\ \cos \theta & -\sin \theta} \\ \det = -1}$$
+Further,
+\begin{align*}
+\chi_{S_\theta} &= x^2 - \sin^2 \theta - \cos^2 \theta = x^2 - 1 = (x+1)(x-1)\\
+&\Rightarrow S_\theta \text{ is diagonalizable (the eigenvector for 1 gives the line of reflection)}\\
+\chi_{R_\theta} &= x^2 - 2x \cos \theta + \cos^2 \theta + \sin^2 \theta = x^2 - 2x \cos \theta + 1 = (x - \lambda)(x - \bar{\lambda}) \tag{$\lambda = e^{2\pi i \theta}$}\\
+&\Rightarrow R_\theta \text{ has real eigenvalues } \iff \theta = 0, \pi\\
+&\phantom{\Rightarrow\;\,} R_\theta \text{ is \textbf{not} diagonalizable over $\R$ for } \theta \neq 0, \pi
+\end{align*}
+\end{exmp}
+
+\newpage
+
+\begin{thm}
+Let $T: V \to V$ be an orthogonal map over a finite dimensional, real inner product space $V$. Then there exists an orthonormal basis $\B$ such that:
+$$_\B[T]_\B = \pmx{I\\&-I\\&&R_{\theta_i}\\&&&\ddots\\&&&&R_{\theta_k}}$$
+\pr{
+Let $S = T + T^*$. Then $S^* = (T + T^*)^* = T^* + T = S$, thus $S$ is self-adjoint, and, by Theorem 8.21, there exists an orthonormal basis of eigenvectors. Accordingly we can write $V = V_{\lambda_1} \opl V_{\lambda_2} \opl \cdots \opl V_{\lambda_n}$ with $\lambda_i \neq \lambda_j$ for $i \neq j$ and where $V_{\lambda_i}$ is the $\lambda_i$-eigenspace of $V$.
+
+Now suppose $v \in V_\lambda$, then:
+$$S(Tv) = (T + T^*)(Tv) = T(T + T^*)(v) = T(Sv) = T(\lambda v) = \lambda Tv$$
+Thus $Tv$ is a $\lambda$ eigenvector of $S$, that is $Tv \in V_\lambda$, and hence $V_\lambda$ is $T$-invariant for each $\lambda$. Accordingly, we may restrict the problem to $T|_{V_\lambda}$
+
+For $v \in V_\lambda$:
+\begin{align*}
+(T + T^{-1})v	&= \lambda v\\
+\Rightarrow T(T + T^{-1})v &= \lambda Tv\\
+\Rightarrow (T^2 - \lambda T + I)v &= 0
+\end{align*}
+
+If $\lambda = \pm 2$, then $(T-\lambda I)^2 = 0$ or $T+ \lambda I)^2 = 0$ with $\lambda = \pm 1$, and thus $T|_{V_\lambda} = \pm I$
+
+If $\lambda \neq \pm 2$, then $T|_{V_\lambda}$ has no real eigenvalues - note: real eigenvalues $= \pm 1$\\
+So $\sett{v, Tv}$ are linearly independent for $V \neq 0$.\\ Consider $W = \spn{v, Tv}$. $W$ is $T$-invariant:
+\begin{align*}
+v &\mapsto Tv \in W\\
+Tv &\mapsto T^2v = \lambda Tv - v \in W
+\end{align*}
+Hence, $W^\perp$ is also $T$ invariant. 
+
+By induction, $V_\lambda$ splits into two-dimensional $T$-invariant subspaces.\\ Moreover, $\chi_{T|_W} (x) = x^2 - \lambda_i x + 1$ and hence $\det T|_W = 1$.\\ Thus, by Example 8.8, each $T|_W$, with respect to some orthonormal basis of $W$, is of the form $\pmx{\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta}$ for some $\theta \neq 0, \pi$
+}\qed
+\end{thm}
+
+\newpage
+
+\section{Normal Transformations}
+
+\begin{defn}
+Let $T: V \to V$ be a linear transformation and $V$ be a finite dimensional complex inner product space.\\
+$T$ is \textbf{normal} if it commutes with its adjoint:
+$$T^* T = TT^*$$
+\end{defn}
+
+\begin{exmp}
+\begin{align*}
+T \text{ unitary } &\Rightarrow T^* = T^{-1} \Rightarrow T \text{ is \textbf{normal}}\\
+T \text{ self adjoint } &\Rightarrow T^* = T^{\phantom{-1}} \Rightarrow T \text{ is \textbf{normal}}
+\end{align*}
+\end{exmp}
+
+\begin{lem}
+Let $T$ be normal, then:
+\begin{adjustwidth}{1cm}{}
+\begin{enumerate}[(1) ]
+\item $Tv = 0 \iff T^*v = 0$
+\pr{
+\begin{align*}
+Tv = 0 	&\iff \spn{Tv,Tv} = 0\\
+		&\iff \spn{T^*Tv,v} = 0\\
+		&\iff \spn{TT^*v,v} = 0\\
+		&\iff \spn{T^*v,T^*v} = 0\\
+		&\iff T^*v = 0
+\end{align*}
+}
+\item $T - \lambda I$ is normal for all $\lambda \in \C$
+\pr{
+$(T - \lambda I)^* = T^* - \bar{\lambda} I$, this commutes with $T - \lambda I$ as $T$ commutes with $T^*$ and both the identity matrix and scalar multiplication commute with anything
+}
+\item $Tv = \lambda v \Rightarrow T^*v = \bar{\lambda}v$
+\pr{
+\begin{align*}
+Tv = \lambda v	&\iff (T - \lambda I)v = 0\\
+				&\iff (T - \lambda I)^*v = 0 \tag{by (1)}\\
+				&\iff T^*v = \bar{\lambda} v \tag{by (2)}
+\end{align*}
+}
+\item $Tv = \lambda_1 v,\, Tw = \lambda_2 v,\, \lambda_1 \neq \lambda_2 \Rightarrow \spn{v,w} = 0$
+\pr{
+\begin{align*}
+\lambda_1 \spn{v,w}	&= \spn{\bar{\lambda_1}v, w}\\
+					&= \spn{T^*v,w} \tag{by (3)}\\
+					&= \spn{v, Tw}\\
+					&= \spn{v, \lambda_2 w}\\
+					&= \lambda_2 \spn{v,w}
+\end{align*}
+Since $\lambda_1 \neq \lambda_2$ we must have $\spn{v,w} = 0$
+}\qed
+\end{enumerate}
+\end{adjustwidth}
+\end{lem}
+
+\newpage
+
+\begin{thm}
+Let $T: V \to V$ be a normal linear transformation over a finite dimensional complex inner product space $V$. Then there is an orthonormal basis of eigenvectors for $V$
+\pr{
+As $V$ is complex there is an eigenvalue $\lambda$ and corresponding normed eigenvector $v \in V$ with $||v|| = 1$, such that $Tv = \lambda v$.
+
+Consider $U = \spn{v}$. By Lemma 8.24(3) we have that $U$ is both $T$- and $T^*$- invariant.
+
+Consider $U^\perp$. $U^\perp$ is also $T$- and $T^*$-invariant since for all $u \in U, w \in U^\perp$:
+\begin{align*}
+\spn{u, Tw} &= \spn{T^*u, w}\\
+			&= \spn{u', w} \tag{for some $u' \in U$ since $U$ is $T^*$ invariant}\\
+			&= 0\\\\
+\spn{u, T^*w}	&= \spn{Tu, w}\\
+				&= \spn{u', w}\\
+				&= 0
+\end{align*} 
+
+Now we proceed by induction on the dimension of $V$.
+
+We have $\dim U^\perp = \dim V - 1 < \dim V$ and we know $T|_{U^\perp}$ is normal, thus, by induction hypothesis, there exists an orthonormal basis of eigenvectors of $T|_{U^\perp}$ for $U^\perp$, $\B' = \sett{e_2, \ldots, e_n}$.
+
+Then, putting $e_1 = v$ we obtain $\B =\sett{e_1, \ldots, e_n}$ is an orthonormal basis of eigenvectors of $T$
+}\qed
+\end{thm}
+
+\begin{thm}\textnormal{\textbf{Spectral Theorem}}\\
+Let $T: V \to V$ be a normal (symmetric) linear transformation on a finite dimensional complex (real) inner product space.\\ Then there exist orthogonal projections $E_1, \ldots, E_r$ on $V$ and $\lambda_1, \ldots, \lambda_r \in \C (\R)$ such that:
+\begin{adjustwidth}{1cm}{}
+\begin{enumerate}[(1) ]
+\item $T = \lambda_1 E_1 + \ldots + \lambda_r E_r$
+\item $E_1 + \ldots + E_r = I$
+\item $E_i E_j = 0$ for all $i \neq j$
+\end{enumerate}
+\end{adjustwidth}
+
+\begin{rem} This is just a reformulation of Theorem 8.23 \end{rem}
+
+\pr{
+By Theorem 8.23, $V = V_{\lambda_1} \opl \cdots \opl V_{\lambda_r}$
+
+Then, each $E_i$ is a projection from $V$ to $V_{\lambda_i}$, that is $E_i = \smp{0 \\ & \cdot \\ &&0 \\ &&&I\\ &&&&0 \\ &&&&&\cdot \\ &&&&&&0}$
+}
+\end{thm}
+
+\newpage
+
+\section{Simultaneous Diagonalization}
+
+\begin{rem}
+If $\B$ is a basis wrt which both $S$ and $T$ are diagonal, for $S,T : V \to V$, then $ST = TS$
+$${_\B[ST]_\B} = \mx{\\{_\B[S]_\B}{_\B[T]_\B} = {_\B[T]_\B}{_\B[S]_\B}\\ \text{(diagonal matrices commute)}}= {_\B[TS]_\B}$$
+\end{rem}
+
+\begin{thm}
+If $S,T : V \to V$ are normal (symmetric) linear transformations on a finite dimensional complex (real) inner product space with $ST = TS$, then there exists and orthonormal basis of eigenvectors for $S$ and $T$ simultaneously
+\pr{
+$V$ decomposes to $\lambda$-eigenspaces for $S$: $V = V_{\lambda_1} \opl \cdots \opl V_{\lambda_s}$
+
+Let $v \in V_\lambda$, then $$S(Tv) = T(Sv) = T(\lambda v) = \lambda T(v)$$
+So $Tv$ is an eigenvector of $S$ and hence $Tv \in V_\lambda$
+
+Now, there exists an orthonormal basis of eigenvectors of $V_\lambda$ for $T|_{V_\lambda}$, $\B_\lambda$
+
+Then $\B = \B_{\lambda_1} \cup \cdots \cup \B_{\lambda_s}$ is an orthonormal basis of eigenvectors for $T$ and $S$ simultaneously.
+}\qed
+\end{thm}
+
+\begin{ch}${}$\\
+If $S_1, \ldots, S_r : V \to V$ are normal (symmetric) for $\dim V < \infty$ over $\C (\R)$ with $S_i S_j = S_j S_i$ for all $i,j$. Then there exists an orthonormal basis of eigenvectors for all $S_k$ simultaneously.
+\end{ch}
+
+\begin{ch}${}$\\
+If $A_1, \ldots, A_r \in O_n$ then there exists $P \in O_n$ such that $$P^{-1}A_iP = \pmx{I\\& -I\\&&R_{\theta_1}\\&&&\ddots\\&&&&R_{\theta_s}}$$
+\end{ch}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
