@@ -689,14 +689,14 @@ Hence $m_A(x) = (x - 1)^2(x - 2)$
 \begin{prop}
 Let $a, b \in \F[x]$ be non-zero polynomials. Assume that $\gcd(a,b) = c \in \F[x]$.\\ Then $\exists s,t \in \F[x]$ such that 
 \begin{align*} 
-a(x)s(x) + b(x)t(x) = c(x) \tag{$*$} 
+a(x)s(x) + b(x)t(x) = c(x)
 \end{align*}
 
 \pr{
 Without loss of generality, assume that $\deg a \geq \deg b$ and $\gcd(a,b) = 1$\\
 Proceed by induction on $\deg a + \deg b$\\
 By the division algorithm for polynomials we have that there exist $q,r \in \F[x]$ such that
-$$a(x) = q(x)b(x) + r(x) \text{\;\; and \;\;} \deg r < \deg b$$
+$$a(x) = q(x)b(x) + r(x) \text{\;\; and \;\;} \deg r < \deg b  \tag{$*$} $$
 Now, if $r(x) = 0$, then we have that $b(x) = \lambda \in \F$, some constant (since $\gcd(a,b) = 1$) and hence
 $$a(x) + b(x)\left(\frac{1}{\lambda}\right)(1 - a(x)) = 1$$
 and then we are done. So, assume now that $r \neq 0$, note:
@@ -764,7 +764,7 @@ b(T)[(a(T)s(T))(v)] &= s(T)[a(T)b(T)(v)]\\
 					&= \boldsymbol{0}
 \end{align*}
 
-Hence $a(T)s(T) \in \ker b(T)$, and similarly $b(T)t(T) \in \ker a(T)$ so $V = \ker a(T) + \ker b(T)$.
+Hence $a(T)s(T)v \in \ker b(T)$, and similarly $b(T)t(T)v \in \ker a(T)$ so $V = \ker a(T) + \ker b(T)$.
 
 It remains to show that $\ker a(T) \cap \ker b(T) = \{ 0 \}$
 
@@ -859,7 +859,7 @@ Let $\mathcal{B}_i$ be a basis for $E_{\lambda_i}$: $\mathcal{B} = \cup_i \mathc
 
 \item[$\Rightarrow$] $T$ is diagonal $\rightarrow$ $\exists \mathcal{B}$ a basis of eigenvectors and every $v \in V$ is $v = \sum_i a_i v_i$ for these eigenvectors $v_i$.
 
-Define $f(x) = (x - \lambda_1) \cdots (x - \lambda_n)$, with $\lambda_i$ the distinct eigenvalues of the $v_i$. Then $f(T) = 0$ since $f$ annihilates every element of $\mathcal{B}$. Now, since we must have $m_T | f$ then $m_T = f$, a product of distinct linear factors.
+Define $f(x) = (x - \lambda_1) \cdots (x - \lambda_n)$, with $\lambda_i$ the distinct eigenvalues of the $v_i$. Then $f(T) = 0$ since $f(T)$ annihilates every element of $\mathcal{B}$. Now, since we must have $m_T | f$ then $m_T = f$, a product of distinct linear factors.
 \end{itemize}\qed
 
 }
