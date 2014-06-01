@@ -911,24 +911,24 @@ Let $\B_i$ be such that $\overline{\B_i} = \{ w + \ker T^{i-1} : w \in \B_i \}$ 
 \pr{
 Since $V$ is finite dimensional we have $\dim V = \dim U + \dim V/U$
 \begin{align*}
-\dim V = \dim T^m 	&= \dim T^m/T^{m-1} + \dim T^{m-1}\\
-					&= \dim T^m/T^{m-1} + \dim T^{m-1}/T^{m-2} + \dim T^{m-2}\\
+\dim V = \dim T^m 	&= \dim (\ker T^m/ \ker T^{m-1}) + \dim (\ker T^{m-1})\\
+					&= \dim (\ker T^m/ \ker T^{m-1}) + \dim (\ker T^{m-1}/ \ker T^{m-2}) + \dim (\ker T^{m-2})\\
 					&\cdots \\
-					&= \dim T^{m}/T^{m-1} + \ldots + \dim T^2/T + \dim T/\{0\} \\
-					&= \dim \overline{\B_m} + \cdots + \dim \overline{\B_2} + \dim \overline{\B_1}\\
-					&= \dim \B_m + \cdots + \dim \B_2 + \dim B_1
+					&= \dim (\ker T^{m}/ \ker T^{m-1}) + \ldots + \dim (\ker T^2/\ker T) + \dim (\ker T/\{0\}) \\
+					&= \left | \overline{\B_m} \right | + \cdots + \left | \overline{\B_2} \right | + \left | \overline{\B_1} \right |\\
+					&= \left | \B_m \right | + \cdots + \left | \B_2 \right | + \left | \B_1 \right |
 \end{align*}
 $$\underbrace{\underbrace{\underbrace{\B_1}_{\ker T} \cup \; \B_2}_{\ker T^2} \cup \cdots \cup \B_m}_{\ker T^m = V}$$
 }
 \newpage
 \todo[inline, color = white]{{\sc Claim}$_2$: $\{Tw + \ker T^{i-1} : w \in \B_{i+1} \} \subset \ker T^i / \ker T^{i-1}$ is linearly independent}
 \pr{${}$\\
-Assume $\displaystyle \sum_{s=1}^i a_s (Tw_s + \ker T^{i-1}) = \ker T^{i-1}$
+Assume $\displaystyle \sum_{s} a_s (Tw_s + \ker T^{i-1}) = \ker T^{i-1}$
 \begin{enumerate}[$\Longrightarrow$]
 \item $\sum_s a_s Tw_s \in \ker T^{i-1}$
 \item $T \sum_s a_s w_s \in \ker T^{i-1}$
 \item $\sum_s a_s w_s \in \ker T^i$
-\item $\sum_s a_S (w_s + \ker T^i) = \ker T^i$
+\item $\sum_s a_s (w_s + \ker T^i) = \ker T^i$
 \item $a_s = 0$ for all $s$ as $\overline{\B_{i+1}}$ is a basis for $\ker T^{i+1}/\ker T^i$
 \end{enumerate}
 }
@@ -1024,7 +1024,7 @@ Consider $\mathcal{J}_k(\lambda) = \smp{\lambda & 1 & & \\ & \ddots & \ddots & \
 
 Suppose $V_n = \mathcal{J}_k(\lambda)V_{n-1} = \left( \mathcal{J}_k(\lambda)\right)^n V_0$
 
-Then $v_n^{{k-i}} = \lambda^n v_0^{{k-i}} + {n\choose 1} \lambda^{n-1} v_0^{{k-i+1}} + \cdots + {n \choose i} \lambda^{n-1} v_0^{k}$
+Then $v_n^{{k-i}} = \lambda^n v_0^{{k-i}} + {n\choose 1} \lambda^{n-1} v_0^{{k-i+1}} + \cdots + {n \choose i} \lambda^{n-i} v_0^{k}$
 
 \pr{
 By induction on $n$
@@ -1039,7 +1039,7 @@ v_n^{{k-i}}	= \; &\lambda v_{n-1}^{{k-i}} + v_{n-1}^{{k-i+1}}
 				&+ \left[ \lambda^{n-1} v_0^{{k-i+1}} + {n-1 \choose 1} \lambda^{n-2} v_0^{{k-i+2}} + \cdots + {n-1 \choose i-1} \lambda^{n-i} v_0^k \right]\\
 				= \; &\lambda^n v_0^{{k-i}} + \left[ {n-1 \choose 0} + {n-1 \choose 1} \right] \lambda^{n-1} v_0^{k-i+1} + \cdots + \left[ {n-1 \choose i-1} + {n-1 \choose i} \right] \lambda^{n-i} v_0^k
 \intertext{We now use the identity ${n-1 \choose j-1} + {n-1 \choose j} = {n \choose j}$}
-				= \; &\lambda^n v_0^{{k-i}} + {n\choose 1} \lambda^{n-1} v_0^{{k-i+1}} + \cdots + {n \choose i} \lambda^{n-1} v_0^{k}
+				= \; &\lambda^n v_0^{{k-i}} + {n\choose 1} \lambda^{n-1} v_0^{{k-i+1}} + \cdots + {n \choose i} \lambda^{n-i} v_0^{k}
 \end{align*}
 Which is the desired identity
 
@@ -1079,7 +1079,7 @@ Let $\bar{b} = (b_0, b_1, \ldots)$ be any sequence, then $\bar{b} \big( (a_0, a_
 \bar{b} \big( (a_0, a_1, \ldots) + \lambda(a'_0, a'_1, \ldots) \big)
 	&= \sum_i \big( a_i + \lambda a'_i \big) b_i \\
 	&= \sum_i a_i b_i + \lambda \sum_i a'_i b_i \\
-	&= \bar{b} \big( (a_0, a_1, \ldots) \big) + \bar{b} \big( (a'_0, a'_1, \ldots) \big)
+	&= \bar{b} \big( (a_0, a_1, \ldots) \big) + \lambda \bar{b} \big( (a'_0, a'_1, \ldots) \big)
 \end{align*}
 }
 \end{exmp}
@@ -1138,7 +1138,7 @@ A \textbf{natural} linear map is independent of choice of basis\\ (in contrast t
 \newpage
 
 \begin{thm}
-Let $V$ be a finite dimensional vector space, then $V \mapsto (V')' = V''$ defined by $v \mapsto E_v$ where $E_v : V' \to \F$ is defined by $f \mapsto f(v)$, taking a vector $v$ to it's evaluation map $E_v$ is a natural linear isomorphism.
+Let $V$ be a finite dimensional vector space, then $V \to (V')' = V''$ defined by $v \mapsto E_v$ where $E_v : V' \to \F$ is defined by $f \mapsto f(v)$, taking a vector $v$ to it's evaluation map $E_v$ is a natural linear isomorphism.
 
 \pr{${}$
 \begin{itemize}
@@ -1207,7 +1207,7 @@ If $U, W \leq V$ then:
 \begin{enumerate}[(1) ]
 \item $U \leq W \Longrightarrow W^0 \leq U^0$
 \item $(U+W)^0 = U^0 \cap W^0$
-\item $(U \cap W)^0 = U^0 + W^0$
+\item $(U \cap W)^0 = U^0 + W^0$ if $\dim V < \infty$
 \end{enumerate}
 
 \pr{
@@ -1225,7 +1225,7 @@ If $U, W \leq V$ then:
 
 \begin{flalign*}
 (3) \hspace*{10pt} \underline{U^0 + W^0 \leq (U \cap W)^0}\\
-& f \in U + W \iff \exists g \in U^0, \exists h \in W^0 : f = g + h &\\
+& f \in U^0 + W^0 \iff \exists g \in U^0, \exists h \in W^0 : f = g + h &\\
 & \phantom{f \in U + W \;\,} \Longrightarrow \forall x \in U \cap W : f(x) = g(x) + h(x) = 0\\
 & \phantom{f \in U + W} \iff f \in (U \cap W)^0\\
 \phantom{(3) \hspace*{10pt}} \underline{(U \cap W)^0 = U^0 + W^0}\\
@@ -1324,7 +1324,7 @@ Let $S,T \in \hom(V,W), \lambda \in \F, f \in W'$ and $v \in V$, then
 \begin{align*}
 (T + \lambda S)'(f)(v)	&= (f \circ (T + \lambda S))(v)\\
 						&= f((T + \lambda S)(v))\\
-						&= f(T(v)) + f(\lambda S(v))\\
+						&= f(T(v)) + \lambda f( S(v))\\
 						&= T'(f)(v) + \lambda S'(f)(v)\\
 						&= (T' + \lambda S')(f)(v)
 \end{align*}\vspace{-8pt}\qed
@@ -1355,7 +1355,7 @@ Let $V, W$ be finite dimensional vector spaces\\
 Let $\B_V, \B_W$ be bases of $V$ and $W$ respectively\\
 Let $\B_V', B_W'$ be the corresponding dual bases of $V'$ and $W'$\\
 Then, for any linear map $T: V \to W$
-$$\Big( {_{\B_w}[}T]_{\B_V} \Big)^t = {_{\B_V'}[}T']_{\B_W'}$$
+$$\Big( {_{\B_W}[}T]_{\B_V} \Big)^t = {_{\B_V'}[}T']_{\B_W'}$$
 where $A^t$ denotes the transpose of $A$.
 
 \pr{
@@ -1367,13 +1367,13 @@ Then $\displaystyle T(e_j) = \sum_{i=1}^m a_{ij} x_i$ and $x_i'(T(e_j)) = a_{ij}
 
 Put $_{\B_v'}[T']_{\B_W'} = B = (b_{ij})_{n \times m}$
 
-Then $\displaystyle T'(x_i') = \sum_{j=1}^n b_{ji} e_j$ and $T'(x_i')(e_j) = b_{ji}$
+Then $\displaystyle T'(x_i') = \sum_{j=1}^n b_{ji} e_j'$ and $T'(x_i')(e_j) = b_{ji}$
 
 Hence $b_{ji} = T'(x_i')(e_j) = x_i'(T(e_j)) = a_{ij}$ thus $B = A^t$
 }\qed
 \end{thm}
 
-\begin{rem} The above theorem is the isomorphism from $M_{n \times m}(\F) \to M_{m \times n}$ given by $A \mapsto A^t$ \end{rem}
+\begin{rem} The above theorem is the isomorphism from $M_{n \times m}(\F) \to M_{m \times n}(\F)$ given by $A \mapsto A^t$ \end{rem}
 
 \chapter{Bilinear Forms and Inner Products}
 
@@ -1453,7 +1453,7 @@ Observe that $\Fc(e_i,e_j) = \bar{e_i}^t A e_j = a_{ij}$ and $\overline{\Fc(e_j,
 \item $\Fc$ is non-degenerate $\iff$ $A$ is non-singular
 \begin{align*}
 A \text{ singular }	&\iff \exists w \neq 0 \in V : Aw = 0\\
-					&\iff \exists w \neq 0 \in V : \forall v \in V \bar{v}^tAw = 0\\
+					&\iff \exists w \neq 0 \in V : \forall v \in V : \bar{v}^tAw = 0\\
 					&\iff \Fc \text{ degenerate }
 \end{align*}
 \end{itemize}
@@ -1491,12 +1491,13 @@ Assume $\sum_i \lambda_i w_i = 0$ for some $\lambda_i \in \F$
 Let $\{ v_1, \ldots, v_n \}$ be a basis of the inner product space $V$
 \begin{flalign*}
 \text{Put } w_1 &= v_1&\\
-	w_2 &= v_2 - \frac{\spn{w_1, v_2}}{\spn{w_1, w_1}}\\
+	w_2 &= v_2 - \frac{\spn{w_1, v_2}}{\spn{w_1, w_1}} w_1\\
 		&\vdots\\
 	w_k &= v_k - \sum_{i=1}^{k-1} \frac{\spn{w_i, v_k}}{\spn{w_i, w_i}} w_i \hspace{50pt} (*)
 \end{flalign*}
 
 Clearly $\spn{w_i} = \spn{v_i}$\\
+\todo[inline, color=red!30]{Editor's note: need to show that $w_k \neq 0$}
 Assuming $\spn{w_1, \ldots, w_{k-1}} = \spn{v_1, \ldots, v_{k-1}}$ we have by $(*)$
 $$\spn{w_1, \ldots, w_k} = \spn{w_1, \ldots, w_{k-1}, v_k}$$
 Then by the inductive hypothesis we have
@@ -1536,7 +1537,7 @@ Let $V$ be an inner product space over $\F$ ($\R$ or $\C$)
 
 Then for all $v \in V$
 \begin{align*}
-\spn{v,\underline{\;\;}\,} : V &\to \R\\
+\spn{v,\underline{\;\;}\,} : V &\to \F\\
 						w &\mapsto \spn{v,w}
 \end{align*}
 Is a linear functional on $V$ as $\spb$ is linear in the second co-ordinate
@@ -1570,7 +1571,7 @@ $U^\perp$ is a linear subspace
 
 \pr{
 For all $v, w \in U^\perp, \lambda \in \F$ and for all $u \in U$:
-$$\spn{u, v + \lambda w} = \spn{u, v} + \lambda{u,w} = 0$$
+$$\spn{u, v + \lambda w} = \spn{u, v} + \lambda \spn{u,w} = 0$$
 Thus $v + \lambda w \in U^\perp$
 }\qed
 \end{prop}
@@ -1606,7 +1607,7 @@ Take $v \in (U+W)^\perp$. Since $U$ and $W$ are subspaces of $V$ they both conta
 Conversely, take $v \in U^\perp \cap W^\perp$. Then for all $\omega \in U + W$ we have $\omega = u + w$ for some $u \in U, w \in W$ and hence $\spn{v,\omega} = \spn{v,u+w} = \spn{v,u} + \spn{v,w} = 0 + 0 = 0$ and so $v \in (U+W)^\perp$.
 }\qed
 
-\item $(U \cap W)^\perp \geq U^\perp + W^\perp$ with $= \iff \dim V < \infty$
+\item $(U \cap W)^\perp \geq U^\perp + W^\perp$ with equality if $\dim V < \infty$
 
 \pr{
 Take $v \in U^\perp + W^\perp$, then there exist $u \in U^\perp, w \in W^\perp$ such that $v = u + w$. Now, for $\omega \in U \cap W$ we have $\omega \in U$ and $\omega \in W$, therefore
@@ -1623,7 +1624,7 @@ Further, if $\dim V < \infty$ then we can apply the dimension formula to obtain
 Hence, by dimensionality, we have $(U \cap W)^\perp = U^\perp + W^\perp$ when $\dim V < \infty$\\
 \qed}
 
-\item $U \leq (U^\perp)^\perp$ with $= \iff \dim V < \infty$
+\item $U \leq (U^\perp)^\perp$ with equality if $\dim V < \infty$
 
 \pr{
 Let $u \in U$
@@ -1678,7 +1679,7 @@ Define $\spn{f,g} = f(1)g(1) + f(2)g(2) + f(3)g(3)$
 Then $\spb$ is bilinear, symmetric and positive definite:
 \begin{align*}
 \spn{f,f} =  f(1)^2 + f(2)^2 + f(3)^2 = 0 &\iff f(1) = f(2) = f(3) = 0\\
-	&\iff f \text{ has 3 roots \textbf{or} } f \equiv 0
+	&\hspace{11.5pt} \Rightarrow f \text{ has 3 roots }
 \end{align*}
 Since $f$ has degree $\leq 2$ it cannot have 3 roots, thus $f \equiv 0$
 
@@ -1744,10 +1745,10 @@ Let $T: V \to V$ be linear and $\B = \{ e_1, \ldots, e_n \}$ be an orthonormal b
 $$_\B[T^*]_\B = {_\B\overline{[T]}_\B}^t$$
 
 \pr{
-Let $A = {_\B[T]_\B}$ and $B = {_\B[T]_\B}$\\ Then,
+Let $A = {_\B[T]_\B}$ and $B = {_\B[T^*]_\B}$\\ Then,
 \begin{align*}
 b_{ij}	&= \spn{e_i, T^*e_j}\\
-		&= \overline{\spn{T*e_j, e_i}}\\
+		&= \overline{\spn{T^*e_j, e_i}}\\
 		&= \overline{\spn{e_j, Te_i}}\\
 		&= \overline{a_{ji}}
 \end{align*}
@@ -1820,7 +1821,7 @@ Hence $Tw \in U^\perp$, and thus $U^\perp$ is $T$-invariant
 \newpage
 
 \begin{thm}
-Suppose $T: V \to V$ is self-adjoint and $\dim V < \infty$, then there exists an orthonormal basis of eigenvectors
+Suppose $T: V \to V$ is self-adjoint over a complex vector space with $\dim V < \infty$, then there exists an orthonormal basis of eigenvectors
 \pr{
 By Lemma 8.12 there exists $\lambda \in \R$ and $w \neq 0 \in V$ with $Tw = \lambda w$.
 
@@ -1873,7 +1874,7 @@ The following are equivalent:
 \begin{adjustwidth}{1cm}{}
 \begin{enumerate}[(1) ]
 \item $T^* = T^{-1}$
-\item $T$ preserves innerproducts: $\spn{v,w} = \spn{Tv,Tw} \hspace*{10pt} \forall v,w \in V$
+\item $T$ preserves inner products: $\spn{v,w} = \spn{Tv,Tw} \hspace*{10pt} \forall v,w \in V$
 \item $T$ preserves lengths: $||v|| = ||Tv|| \hspace{10pt} \forall v \in V$
 \end{enumerate}
 \end{adjustwidth}
@@ -1895,7 +1896,7 @@ $$d(v,w) = ||v-w|| = ||T(v-w)|| = ||Tv - Tw|| = d(Tv,Tw)$$
 \end{rem}
 
 \begin{rem}
-Let $\B$ be an orthonormal basis for $V$ and $T$ be an orthogonal/unitary linear transformation. Then $_\B[T]_\B$ is an orthogonal/unitary matrix - the columns (and rows) form orthonormal bases.
+Let $\B$ be an orthonormal basis for $V$ and $T$ be an orthogonal/unitary linear transformation. Then $_\B[T]_\B$ is an orthogonal/unitary matrix - the columns (and rows) form an orthonormal basis.
 \end{rem}
 
 \begin{prop}
@@ -2029,7 +2030,7 @@ For $v \in V_\lambda$:
 \Rightarrow (T^2 - \lambda T + I)v &= 0
 \end{align*}
 
-If $\lambda = \pm 2$, then $(T-\lambda I)^2 = 0$ or $T+ \lambda I)^2 = 0$ with $\lambda = \pm 1$, and thus $T|_{V_\lambda} = \pm I$
+If $\lambda = \pm 2$, then $(T-\mu I)^2 = 0$ or $(T+ \mu I)^2 = 0$ with $\mu = \pm 1$, and thus $T|_{V_\lambda} = \pm I$
 
 If $\lambda \neq \pm 2$, then $T|_{V_\lambda}$ has no real eigenvalues - note: real eigenvalues $= \pm 1$\\
 So $\sett{v, Tv}$ are linearly independent for $V \neq 0$.\\ Consider $W = \spn{v, Tv}$. $W$ is $T$-invariant:
